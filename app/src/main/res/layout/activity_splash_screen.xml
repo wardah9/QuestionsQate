@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.questionqate.SplashScreen">
+
+    <RelativeLayout
+        android:background="#123"
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/splash_logo"
+            android:layout_width="250dp"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/let" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:src="@drawable/progress_splash"
+            android:layout_height="100dp" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7488a3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/login_bac"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="9dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/let" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="22dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:text="rosy123@gmail.com"
+                android:singleLine="true"
+                android:textColor="#a8c2e4"
+                android:textColorHint="#a8c2e4"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Password"
+                android:text="Rose123"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#a8c2e4"
+                android:textColorHint="#a8c2e4"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="50dp"
+            android:paddingLeft="4dp"
+            android:singleLine="true"
+            android:text="Remember me"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/login_practice"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <!--</LinearLayout>-->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:background="@drawable/corner"
+            android:onClick="OnLoginClicked"
+            android:text="Log In"
+            android:textAllCaps="false"
+            android:textSize="23sp" />
+
+        <!--<Button-->
+        <!--android:id="@+id/SignUp1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="13dp"-->
+        <!--android:layout_marginLeft="13dp"-->
+        <!--android:layout_marginRight="13dp"-->
+        <!--android:background="@drawable/corner_forget_pass"-->
+        <!--android:text="Sign Up"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textSize="25sp" />-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/forget_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="18dp"
+        android:text="Forget your password?"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="18dp"
+        android:text="Don't have an account? SignUp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
+
+</RelativeLayout>

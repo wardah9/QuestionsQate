@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.questionqate">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_out"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo_out"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".ForgetPasswordActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".PhoneAthunticationActivity" />
+        <activity
+            android:name=".StudentSlideMenu"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LevelsList.LevelsActivity" />
+        <activity android:name=".TimelineQuestionsList.QuestionsList" />
+        <activity android:name=".Question_content.Question_content"></activity>
+    </application>
+
+</manifest>

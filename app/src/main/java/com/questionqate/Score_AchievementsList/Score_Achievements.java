@@ -133,7 +133,7 @@ class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_AchievementsA
                             Intent share = new Intent(Intent.ACTION_SEND);
                             share.setType("image/*");
                             share.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                            share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out on ..");
+                            share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out from Questions Gate applicatio ..");
                             context.startActivity(Intent.createChooser(share, "Share Your Achievement !"));
                         }
                     });

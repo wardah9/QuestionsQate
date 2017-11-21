@@ -1,5 +1,6 @@
 package com.questionqate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.questionqate.Score_AchievementsList.Score_Achievements;
 import com.questionqate.SubjectList_stu.SubjectListAdapter;
 
 public class StudentSlideMenu extends AppCompatActivity
@@ -29,14 +31,12 @@ public class StudentSlideMenu extends AppCompatActivity
 
         subjecAdapter = new SubjectListAdapter(this);
 
-        RecyclerView subjects_list = (RecyclerView) findViewById(R.id.subjects_list);
+        RecyclerView subjects_list = findViewById(R.id.subjects_list);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         subjects_list.setLayoutManager(mLayoutManager);
         subjects_list.setItemAnimator(new DefaultItemAnimator());
         subjects_list.setAdapter(subjecAdapter);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,14 +65,16 @@ public class StudentSlideMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Home) {
+            // wt ?
 
         } else if (id == R.id.nav_score_achievements) {
+            startActivity(new Intent(StudentSlideMenu.this, Score_Achievements.class));
+
+        } else if (id == R.id.nav_profile) {
+
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_about_us) {
-
-        } else if (id == R.id.nav_contact_us) {
+            //share ??
 
         }
 

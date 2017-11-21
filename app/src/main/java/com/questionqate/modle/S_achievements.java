@@ -19,6 +19,7 @@ public class S_achievements {
         this.achievementID = achievementID;
         this.score = score;
         this.level_name = level_name;
+        
     }
 
     public void setFireBaseUserId(String fireBaseUserId) {

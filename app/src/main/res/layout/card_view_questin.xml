@@ -1,53 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/question_card_view"
-    android:layout_marginBottom="8dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/question_status_circle_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="8dp"
+        app:line="@color/colorPrimary"
+        app:lineSize="3dp"
+        app:markerSize="20dp" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/question_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical">
+        android:layout_marginBottom="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp">
 
-        <TextView
-            android:id="@+id/question_text"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/question_choices_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <TextView
-                android:id="@+id/question_counter"
-                android:layout_width="wrap_content"
+                android:id="@+id/question_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="00:20" />
+                android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/question_btn_next"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/question_choices_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Next"
-                />
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <com.questionqate.Utilties.LoadingButton
+                    android:id="@+id/question_btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:lb_btnColor="#00C674"
+                    app:lb_btnDisabledColor="#F44336"
+                    app:lb_btnRippleColor="#9E9E9E"
+                    app:lb_btnText="Submit"
+                    app:lb_resetAfterFailed="false"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

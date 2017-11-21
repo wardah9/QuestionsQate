@@ -35,12 +35,9 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     @Override
     public void onBindViewHolder(SubjectList_holder holder, final int position) {
 
-        holder.subjet_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (position == 0)
-                    context1.startActivity(new Intent(context1, LevelsActivity.class));
-            }
+        holder.subjet_card.setOnClickListener(v -> {
+            if (position == 0)
+                context1.startActivity(new Intent(context1, LevelsActivity.class));
         });
     }
 

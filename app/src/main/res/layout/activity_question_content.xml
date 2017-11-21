@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#7488a3"
     android:orientation="vertical"
-    tools:context=".Questions.Question_content">
+    tools:context=".Question_content.Question_content">
 
     <RelativeLayout
         android:background="#58d9e1e9"

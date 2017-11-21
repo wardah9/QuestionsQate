@@ -7,26 +7,19 @@
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/edit"
+            android:title="Profile" />
+
+        <item
             android:id="@+id/nav_score_achievements"
             android:icon="@drawable/trophy"
             android:title="Score / Achievements" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_about_us"
-                android:icon="@drawable/information"
-                android:title="About Us" />
-            <item
-                android:id="@+id/nav_contact_us"
-                android:icon="@drawable/send"
-                android:title="Contact Us" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="Share" />
 
 </menu>

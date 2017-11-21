@@ -1,60 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:layout_width="190dp"
+        android:layout_width="170dp"
         android:layout_height="200dp"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:background="#dfdbdb"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ach_img"
-                android:scaleType="fitXY"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
+            <LinearLayout
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="130dp" />
+                android:layout_height="match_parent"
+                android:background="#7488a3"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/ach_level_name"
+                <ImageView
+                    android:id="@+id/ach_img"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="LEVEL : Low"
-                    android:textSize="25sp" />
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitXY" />
 
-                <TextView
-                    android:layout_below="@id/ach_level_name"
-                    android:id="@+id/ach_stu_score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SCORE : 3/3"
-                    android:gravity="center"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/ach_share"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:drawableStart="@drawable/ic_menu_share" />
-            </RelativeLayout>
+                    android:paddingTop="5dp">
 
+                    <TextView
+                        android:id="@+id/ach_level_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="LEVEL : Low"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/ach_stu_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ach_level_name"
+                        android:gravity="center"
+                        android:text="SCORE : 3/3"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/ach_share"
+                        android:layout_width="26dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/share" />
+                </RelativeLayout>
+
+            </LinearLayout>
         </LinearLayout>
-
 
     </android.support.v7.widget.CardView>
 </LinearLayout>

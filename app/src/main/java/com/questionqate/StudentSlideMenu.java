@@ -19,7 +19,6 @@ import com.questionqate.SubjectList_stu.SubjectListAdapter;
 public class StudentSlideMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     SubjectListAdapter subjecAdapter;
 
     @Override
@@ -71,7 +70,6 @@ public class StudentSlideMenu extends AppCompatActivity
             startActivity(new Intent(StudentSlideMenu.this, Score_Achievements.class));
 
         } else if (id == R.id.nav_profile) {
-
 
         } else if (id == R.id.nav_share) {
             //share ??

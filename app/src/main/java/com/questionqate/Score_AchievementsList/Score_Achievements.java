@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,10 +39,12 @@ public class Score_Achievements extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score__achievements);
 
-
         achievements_score_list = findViewById(R.id.achievements_score_list);
-        achievements_score_list.setLayoutManager(getLinearLayoutManager());
-        achievements_score_list.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        achievements_score_list.setLayoutManager(mLayoutManager);
+        achievements_score_list.setItemAnimator(new DefaultItemAnimator());
+//        achievements_score_list.setHasFixedSize(true);
 
 
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getAchievements")
@@ -61,9 +65,9 @@ public class Score_Achievements extends AppCompatActivity {
 
     }
 
-    private LinearLayoutManager getLinearLayoutManager() {
-        return new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-    }
+//    private LinearLayoutManager getLinearLayoutManager() {
+//        return new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//    }
 
 }
 
@@ -87,7 +91,7 @@ class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_AchievementsA
     public void onBindViewHolder(Score_Achievement_Holder holder, int position) {
 
         try {
-            if (score_achievementsData.getJSONObject(position) != null) {
+            if (score_achievementsData.getJSONObject(position)!= null) {
 
                 String low = "https://firebasestorage.googleapis.com/v0/b/questionsqate-9a3d7.appspot.com/o/trophy%20(4).png?alt=media&token=5286d9a8-9d7b-4079-a251-fb55ed944c55";
                 String medium = "https://firebasestorage.googleapis.com/v0/b/questionsqate-9a3d7.appspot.com/o/trophy%20(6).png?alt=media&token=bda91fab-9285-4541-bd28-0bc3360b6bfc";
@@ -112,29 +116,26 @@ class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_AchievementsA
                     holder.ach_stu_score.setText("SCORE : "+score + "/ 3");
 
 
-                    holder.ach_share.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Uri uri = null;
+                    holder.ach_share.setOnClickListener(view -> {
+                        Uri uri = null;
 
-                            switch (level) {
-                                case "low":
-                                    uri = Uri.parse(low);
-                                    break;
-                                case "medium":
-                                    uri = Uri.parse(medium);
-                                    break;
-                                case "high":
-                                    uri = Uri.parse(high);
-                                    break;
-                            }
-
-                            Intent share = new Intent(Intent.ACTION_SEND);
-                            share.setType("image/*");
-                            share.putExtra(Intent.EXTRA_STREAM, uri);
-                            share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out on ..");
-                            context.startActivity(Intent.createChooser(share, "Share Your Achievement !"));
+                        switch (level) {
+                            case "low":
+                                uri = Uri.parse(low);
+                                break;
+                            case "medium":
+                                uri = Uri.parse(medium);
+                                break;
+                            case "high":
+                                uri = Uri.parse(high);
+                                break;
                         }
+
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("image/*");
+                        share.putExtra(Intent.EXTRA_STREAM, uri);
+                        share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out on ..");
+                        context.startActivity(Intent.createChooser(share, "Share Your Achievement !"));
                     });
 
             }
@@ -151,7 +152,7 @@ class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_AchievementsA
     public class Score_Achievement_Holder extends RecyclerView.ViewHolder {
 
         ImageView ach_img;
-        TextView ach_share;
+        ImageView ach_share;
         TextView ach_level_name;
         TextView ach_stu_score;
 

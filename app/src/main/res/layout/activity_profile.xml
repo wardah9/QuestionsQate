@@ -5,16 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    
     tools:context=".StudentProfile.Profile">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="250dp">
 
         <com.questionqate.lib.RoundedImageView
             android:id="@+id/profile_image"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/big_user"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
@@ -112,5 +116,10 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

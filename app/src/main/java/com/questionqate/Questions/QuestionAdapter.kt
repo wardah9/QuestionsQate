@@ -117,7 +117,7 @@ class QuestionAdapter(internal var questions: Question, internal var mRecyclerVi
             // questions.setStatus(position + 1, Question.questionStatus.ACTIVE)
             //holder.question_btn_next.isEnabled = false
             holder.question_btn_next.startLoading()
-            addAnswerAndCorrect(cQ.questionId, cQ.answerId, holder, position)
+            addAnswerAndCorrect(cQ.questionId, cQ.answerId.trim(), holder, position)
             // print(questions.questions)
             //     notifyDataSetChanged()
         } catch (e: JSONException) {
@@ -149,7 +149,9 @@ class QuestionAdapter(internal var questions: Question, internal var mRecyclerVi
                             holder.question_btn_next.loadingFailed()
                         }
                         questions.setStatus(position, Question.questionStatus.COMPLETED)
-                        questions.setStatus(position + 1, Question.questionStatus.ACTIVE)
+                        if((position+1)<questions.questions.length()){
+                            questions.setStatus(position + 1, Question.questionStatus.ACTIVE)
+                        }
                         notifyDataSetChanged()
                     } else {
 

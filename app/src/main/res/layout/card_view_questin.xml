@@ -1,75 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:id="@+id/question_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:barchart="http://schemas.android.com/tools">
 
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:visibility="gone">
-
-
-    <com.github.vipulasri.timelineview.TimelineView
-        android:id="@+id/question_status_circle_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="8dp"
-        app:line="@color/colorPrimary"
-        app:lineSize="3dp"
-        app:markerSize="20dp" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/question_card_view"
+    <LinearLayout
+        android:id="@+id/question_parent_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="3">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+
+        <Chronometer
+            android:id="@+id/question_chronometer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.8" />
+
+        <com.github.vipulasri.timelineview.TimelineView
+            android:id="@+id/question_status_circle_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1.4"
+            app:line="@color/colorPrimary"
+            app:lineSize="3dp"
+            app:markerSize="20dp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/question_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.2">
 
-            <TextView
-                android:id="@+id/question_text"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:id="@+id/question_choices_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:padding="4dp">
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <com.questionqate.Utilties.LoadingButton
-                    android:id="@+id/question_btn_next"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/question_text"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:lb_btnColor="#00C674"
-                    app:lb_btnDisabledColor="#F44336"
-                    app:lb_btnRippleColor="#9E9E9E"
-                    app:lb_btnText="Submit"
-                    app:lb_resetAfterFailed="false"
-                    />
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/question_choices_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <com.questionqate.AdditionalViews.LoadingButton
+                        android:id="@+id/question_btn_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:lb_btnColor="#00C674"
+                        app:lb_btnDisabledColor="#F44336"
+                        app:lb_btnRippleColor="@color/cardview_light_background"
+                        app:lb_btnText="Submit"
+                        app:lb_resetAfterFailed="false" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-    </android.support.v7.widget.CardView>
+        <me.ithebk.barchart.BarChart
+            android:id="@+id/bar_chart_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1.4"
+            app:bar_color="@color/colorPrimaryDark"
+            app:bar_max_value="10"
+            app:bar_show_animation="false"
+            app:bar_show_auto_color="true"
+            app:bar_show_value="true"
+            app:bar_text_size="12dp"
+            app:bar_type="vertical"
+            barchart:bar_color="@color/colorPrimary"
+            barchart:bar_max_value="100"
+            barchart:bar_show_animation="true"
+            barchart:bar_show_auto_color="false"
+            barchart:bar_show_value="true"
+            barchart:bar_spaces="0dp"
+            barchart:bar_text_color="#808080"
+            barchart:bar_text_size="10sp"
+            barchart:bar_type="vertical"
+            barchart:bar_width="15dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/questions_end_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="End of The Questions"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:visibility="gone" />
 </LinearLayout>

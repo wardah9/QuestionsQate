@@ -30,35 +30,25 @@ import java.text.NumberFormat;
 
 public class QuestionsMainView extends AppCompatActivity implements StrikeTimeInterface {
 
-    private AndroidNetworking ndroidNetworking;
 
     private RecyclerView mRecyclerView;
-    private Orientation mOrientation = Orientation.VERTICAL;
+
     private int user_strike_time=0;
     private int strike_counter=0;
-
-
-    public enum Orientation {
-        VERTICAL
-    }
-
-    public enum OrderStatus {
-
-        COMPLETED,
-        ACTIVE,
-        INACTIVE;
-
-    }
 
     Chronometer chronometer;
     TextView levek_strike_text,user_strike_counter;
     NumberFormat f = new DecimalFormat("00");
     int minCounter=0;
     int currentCOunter=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions_list);
+
+        Intent intent = getIntent();
+        int level = intent.getIntExtra("level",1);
 
         EventBus.INSTANCE.addStrikeTimeListener(this);
 

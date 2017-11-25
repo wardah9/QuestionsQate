@@ -1,6 +1,8 @@
 package com.questionqate.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,8 @@ import com.questionqate.Pojo.Question;
 
 import org.json.JSONArray;
 
+import java.util.Arrays;
+
 import io.reactivex.Observable;
 
 public class LevelsActivity extends AppCompatActivity {
@@ -29,8 +33,8 @@ public class LevelsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_levels);
         global = new Global_Strings();
 
-
-
+        ProgressDialog dialog = ProgressDialog.show(this, "",
+                "Loading. Please wait...", true);
 
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
                 .setPriority(Priority.MEDIUM)
@@ -51,9 +55,10 @@ public class LevelsActivity extends AppCompatActivity {
                                     .doOnNext(e->QuestionList.getInstance().getQuestionList()
                                             .add(new Question(e.getJSONArray("Questions"),
                                                     e.getInt("StrikeTime"))))
-                                    .doOnNext(e->System.out.println(QuestionList.getInstance().getQuestionList().toArray()))
+                                    .doOnNext(e->System.out.println(Arrays.toString(QuestionList.getInstance().getQuestionList().toArray())))
                                     .subscribe();
 
+                            dialog.dismiss();
                         }
                     }
 
@@ -66,16 +71,16 @@ public class LevelsActivity extends AppCompatActivity {
 
     public void OnLowLevelClicked(View view) {
        global.setLevel_status("low");
-        startActivity(new Intent(this, QuestionsMainView.class));
+        startActivity(new Intent(this, QuestionsMainView.class).putExtra("level",1));
     }
 
     public void OnMediumLevelClicked(View view) {
         global.setLevel_status("medium");
-        startActivity(new Intent(this, QuestionsMainView.class));
+        startActivity(new Intent(this, QuestionsMainView.class).putExtra("level",2));
     }
 
     public void OnHighLevelClicked(View view) {
         global.setLevel_status("high");
-        startActivity(new Intent(this, QuestionsMainView.class));
+        startActivity(new Intent(this, QuestionsMainView.class).putExtra("level",3));
     }
 }

@@ -94,32 +94,23 @@
                 android:background="@drawable/fields_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <!--<EditText-->
-                <!--android:id="@+id/mobile_reg"-->
-                <!--android:drawablePadding="8dp"-->
-                <!--android:hint="Mobile no"-->
-                <!--android:textColor="#a8c2e4"-->
-                <!--android:textColorHint="#a8c2e4"-->
-                <!--android:drawableLeft="@drawable/phone"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--android:padding="6dp"-->
-                <!--android:background="@drawable/fields_reg"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
         </LinearLayout>
+
+        <Button
+            android:id="@+id/reg_btn"
+            android:text="Submit"
+            android:textSize="20sp"
+            android:background="@drawable/fields_reg"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_width="250dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="40dp" />
+
     </ScrollView>
 
-    <Button
-        android:id="@+id/reg_btn"
-        android:text="Submit"
-        android:textSize="20sp"
-        android:background="@drawable/fields_reg"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_width="250dp"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_height="40dp" />
+
 
 </RelativeLayout>

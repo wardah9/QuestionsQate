@@ -1,4 +1,4 @@
-package com.questionqate.modle;
+package com.questionqate.Pojo;
 
 /**
  * Created by anarose on 11/15/17.

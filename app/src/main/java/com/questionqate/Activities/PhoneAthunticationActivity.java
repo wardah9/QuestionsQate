@@ -24,7 +24,6 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.questionqate.modle.Global_Strings;
 import com.questionqate.modle.Student;
 
 import java.util.concurrent.TimeUnit;
@@ -127,9 +126,6 @@ public class PhoneAthunticationActivity extends AppCompatActivity implements Vie
         String key = bundle.getString("key");
 
 //        student = new Student(name,id,email,pass,mPhoneNumberField.getText().toString(),key);
-        //saving UID to Other use..
-        Global_Strings global = new Global_Strings();
-        global.setStudent_UID_firebase(key);
 
         student = new Student(name,id,email,mPhoneNumberField.getText().toString(),pass,key);
         myRef.child(key).setValue(student);

@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.questionqate.Score_AchievementsList.Score_Achievements;
-import com.questionqate.StudentProfile.Profile;
 import com.questionqate.SubjectList_stu.SubjectListAdapter;
 
 public class StudentSlideMenu extends AppCompatActivity
@@ -71,7 +70,6 @@ public class StudentSlideMenu extends AppCompatActivity
             startActivity(new Intent(StudentSlideMenu.this, Score_Achievements.class));
 
         } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(StudentSlideMenu.this, Profile.class));
 
         } else if (id == R.id.nav_share) {
             //share ??

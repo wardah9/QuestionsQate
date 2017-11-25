@@ -1,4 +1,4 @@
-package com.questionqate.Networking
+package com.questionqate.Interface
 
 /**
  * Created by CodeCrazy on 6/24/17.

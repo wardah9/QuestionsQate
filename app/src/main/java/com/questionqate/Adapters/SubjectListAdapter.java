@@ -1,4 +1,4 @@
-package com.questionqate.SubjectList_stu;
+package com.questionqate.Adapters;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.questionqate.LevelsList.LevelsActivity;
+import com.questionqate.Activities.LevelsActivity;
 import com.questionqate.R;
 
 /**

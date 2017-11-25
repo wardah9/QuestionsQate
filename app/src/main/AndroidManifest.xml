@@ -4,9 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -18,24 +15,21 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".ForgetPasswordActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".PhoneAthunticationActivity" />
+        <activity
+            android:name=".StudentSlideMenu"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgetPasswordActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".PhoneAthunticationActivity" />
-        <activity
-            android:name=".StudentSlideMenu"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LevelsList.LevelsActivity" />
         <activity android:name=".Questions.QuestionsMainView" />
-        <activity android:name=".Score_AchievementsList.Score_Achievements" />
-        <activity android:name=".StudentProfile.Profile"/>
-        <activity android:name=".StudentProfile.UpdatedMobileAthuntication"/>
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '27.0.1'
     defaultConfig {
         applicationId "com.questionqate"
         minSdkVersion 22
@@ -62,6 +62,8 @@ dependencies {
     // Other
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.4'
+    compile 'me.ithebk:barchart:0.9'
+
 
     //timeline
     compile 'com.github.vipulasri:timelineview:1.0.5'

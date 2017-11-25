@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    
     tools:context=".StudentProfile.Profile">
 
     <RelativeLayout
@@ -117,9 +116,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/edit_Profile"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:text="Edit"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:background="@drawable/corner"
+        android:layout_width="250dp"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

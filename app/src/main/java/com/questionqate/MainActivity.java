@@ -132,12 +132,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putString("password", pass.getText().toString());
                 editor.putString("user_id", user.getUid());
                 editor.commit();
-                Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
                 global.setStudent_UID_firebase(user.getUid());
                 startActivity(new Intent(MainActivity.this, StudentSlideMenu.class));
             } else {
-                Toast.makeText(this, "not saved", Toast.LENGTH_SHORT).show();
-                global.setStudent_UID_firebase(user.getUid().toString());
+               // Toast.makeText(this, "not saved", Toast.LENGTH_SHORT).show();
+                global.setStudent_UID_firebase(user.getUid());
                 startActivity(new Intent(MainActivity.this, StudentSlideMenu.class));
             }
         } else {

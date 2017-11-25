@@ -13,6 +13,8 @@ public class Student {
     public String userpassword;
     public String fireBaseUserId;
 
+    public Student() {
+    }
 
     public Student(String userName, String userID, String userEmail, String userMobile, String userpassword, String firebaseUserId) {
         this.userName = userName;

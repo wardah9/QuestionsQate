@@ -18,7 +18,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,15 +30,12 @@
         <activity android:name=".PhoneAthunticationActivity" />
         <activity
             android:name=".StudentSlideMenu"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LevelsList.LevelsActivity" />
         <activity android:name=".Questions.QuestionsMainView" />
-        <activity android:name=".Score_AchievementsList.Score_Achievements"/>
-        <activity android:name=".StudentProfile.Profile">
-
-        </activity>
+        <activity android:name=".Score_AchievementsList.Score_Achievements" />
+        <activity android:name=".StudentProfile.Profile"/>
+        <activity android:name=".StudentProfile.UpdatedMobileAthuntication"/>
     </application>
 
 </manifest>

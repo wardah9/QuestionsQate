@@ -1,7 +1,15 @@
 package com.questionqate.SubjectList_stu;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.RemoteInput;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +46,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         holder.subjet_card.setOnClickListener(v -> {
             if (position == 0)
                 context1.startActivity(new Intent(context1, LevelsActivity.class));
+
         });
     }
 

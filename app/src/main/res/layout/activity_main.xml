@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
-                android:text="rosy123@gmail.com"
+                android:text="wardah9966@gmail.com"
                 android:singleLine="true"
                 android:textColor="#a8c2e4"
                 android:textColorHint="#a8c2e4"

@@ -1,5 +1,6 @@
 package com.questionqate.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.questionqate.Pojo.QuestionList;
 import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
 import com.questionqate.Pojo.Question;
+import com.questionqate.Utilties.LoadingDialog;
 
 import org.json.JSONArray;
 
@@ -23,14 +25,15 @@ public class LevelsActivity extends AppCompatActivity {
     Global_Strings global;
     private AndroidNetworking ndroidNetworking;
 
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
         global = new Global_Strings();
-
-
-
+        dialog = new LoadingDialog().init(this,"loading questoins");
+        dialog.setCancelable(false);
+        dialog.show();
 
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
                 .setPriority(Priority.MEDIUM)
@@ -40,6 +43,7 @@ public class LevelsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         //  Log.d("questionArray",response.toString());
+                        dialog.hide();
                         System.out.print(response.length());
                         for(int i=1; i<=response.length(); i++){
                             int finalI = i;

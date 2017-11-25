@@ -1,4 +1,4 @@
-package com.questionqate;
+package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.questionqate.modle.Global_Strings;
+import com.questionqate.R;
+import com.questionqate.Pojo.Global_Strings;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

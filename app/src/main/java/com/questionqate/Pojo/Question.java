@@ -1,10 +1,7 @@
-package com.questionqate.modle;
+package com.questionqate.Pojo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import io.reactivex.Observable;
 
 /**
  * Created by CodeCrazy on 11/20/17.
@@ -16,13 +13,18 @@ public class Question {
     int id;
     String questoin;
     String type;
+    int strikeTime;
+
+    public int getStrikeTime() {
+        return strikeTime;
+    }
 
     public enum questionStatus {
 
         COMPLETED,
         ACTIVE,
         INACTIVE,
-        InCompleted
+        EndOFQuestoins
 
     }
 
@@ -30,32 +32,45 @@ public class Question {
 
             return (questionStatus) questions.getJSONObject(questionIndex).get("status");
 
+
     }
 
     public void setStatus(int questionIndex,questionStatus status) throws JSONException {
 
-        questions.getJSONObject(questionIndex).put("status",status);
+        if(questionIndex<questions.length()){
+            questions.getJSONObject(questionIndex).put("status",status);
+
+        }
 
     }
 
-    public Question(JSONArray questions) {
+    public questionStatus getStatus(int questionIndex) throws JSONException {
 
+           return (questionStatus) questions.getJSONObject(questionIndex).get("status");
+
+    }
+
+    public Question(JSONArray questions,int StrikeTime) {
+
+        questions.remove(0);
         for(int i=0;i<questions.length();i++){
             try {
                 if(i==0){
                     questions.getJSONObject(i).put("status",questionStatus.ACTIVE);
+                }else if(questions.getJSONObject(i).getString("type").equals("end")){
+                    questions.getJSONObject(i).put("status",questionStatus.EndOFQuestoins);
                 }else{
                     questions.getJSONObject(i).put("status",questionStatus.INACTIVE);
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
         System.out.println(questions);
 
         this.questions = questions;
-
+        this.strikeTime = StrikeTime;
 
     }
 

@@ -1,4 +1,4 @@
-package com.questionqate;
+package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,7 +24,8 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.questionqate.modle.Student;
+import com.questionqate.R;
+import com.questionqate.Pojo.Student;
 
 import java.util.concurrent.TimeUnit;
 

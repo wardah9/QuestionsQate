@@ -1,4 +1,4 @@
-package com.questionqate.SubjectList_stu;
+package com.questionqate.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.questionqate.LevelsList.LevelsActivity;
+import com.questionqate.Activities.LevelsActivity;
 import com.questionqate.R;
 
 /**

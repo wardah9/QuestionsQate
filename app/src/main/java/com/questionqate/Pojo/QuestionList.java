@@ -1,6 +1,7 @@
-package com.questionqate.Questions;
+package com.questionqate.Pojo;
 
-import com.questionqate.modle.Question;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,4 +24,15 @@ public class QuestionList {
     public List<Question> getQuestionList() {
         return questionList;
     }
+
+    public JSONObject oneItemQuestionList(int whichlevel, int postion){
+        try {
+           return questionList.get(whichlevel).getQuestions().getJSONObject(postion);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

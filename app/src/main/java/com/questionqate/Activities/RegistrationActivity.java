@@ -1,4 +1,4 @@
-package com.questionqate;
+package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,9 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.questionqate.modle.Student;
+import com.questionqate.R;
+import com.questionqate.Pojo.Student;
 
 import java.util.Objects;
 

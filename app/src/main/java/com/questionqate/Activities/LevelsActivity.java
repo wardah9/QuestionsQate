@@ -1,4 +1,4 @@
-package com.questionqate.LevelsList;
+package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +9,10 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.questionqate.Questions.QuestionList;
-import com.questionqate.modle.Global_Strings;
+import com.questionqate.Pojo.QuestionList;
+import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
-import com.questionqate.Questions.QuestionsMainView;
-import com.questionqate.modle.Question;
+import com.questionqate.Pojo.Question;
 
 import org.json.JSONArray;
 
@@ -44,13 +43,14 @@ public class LevelsActivity extends AppCompatActivity {
                         System.out.print(response.length());
                         for(int i=1; i<=response.length(); i++){
                             int finalI = i;
-
+//        .map(e->e.getJSONArray("Questions"))
+//                                    .doOnNext(e->e.remove(0))
                             Observable.fromArray(response)
                                     .map(e->e.getJSONObject(1).getJSONArray("levels")
                                             .getJSONObject(finalI)) //TODO add dynamic 1,2,3 for level
-                                    .map(e->e.getJSONArray("Questions"))
-                                    .doOnNext(e->e.remove(0))
-                                    .doOnNext(e->QuestionList.getInstance().getQuestionList().add(new Question(e)))
+                                    .doOnNext(e->QuestionList.getInstance().getQuestionList()
+                                            .add(new Question(e.getJSONArray("Questions"),
+                                                    e.getInt("StrikeTime"))))
                                     .doOnNext(e->System.out.println(QuestionList.getInstance().getQuestionList().toArray()))
                                     .subscribe();
 

@@ -1,6 +1,7 @@
 package com.questionqate.Utilties
 
-import com.questionqate.Networking.Exceptions
+import com.questionqate.Interface.StrikeTimeInterface
+import com.questionqate.Interface.Exceptions
 import java.util.ArrayList
 
 /**
@@ -11,9 +12,28 @@ object EventBus {
 
 
     internal var ExceptionInterfaceList: MutableList<Exceptions> = ArrayList()
+    internal var StrikeTime: MutableList<StrikeTimeInterface> = ArrayList()
+
 
     fun addExceptionsListener (listener: Exceptions){
         ExceptionInterfaceList.add(listener)
+    }
+
+
+    fun addStrikeTimeListener (listener: StrikeTimeInterface){
+        StrikeTime.add(listener)
+    }
+
+    fun notifyStrike(time: Int){
+        for(listener in StrikeTime){
+            listener.onStrike(time)
+        }
+    }
+
+    fun notifyRemoveStrike(){
+        for(listener in StrikeTime){
+            listener.RemoveStrike()
+        }
     }
 
     fun notifyException(message: String) {

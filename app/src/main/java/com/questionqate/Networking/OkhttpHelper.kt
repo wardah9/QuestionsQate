@@ -73,45 +73,4 @@ object OkhttpHelper {
 
 
 
-    fun getObservable(url: String, params: HashMap<String, String>?): Observable<Response> {
-        return Observable.create<Response> { o -> get(url, params, object : Callback {
-            override fun onFailure(call: Call?, e: IOException?) {
-                if (e != null) {
-                  //  EventBus.publishException(e.message!!)
-                    call!!.cancel()
-                }
-            }
-
-            override fun onResponse(call: Call?, response: Response?) {
-                if (response != null) {
-                    o.onNext(response)
-                }
-                o.onComplete()
-            }
-        })
-        }
-    }
-
-    fun postObservable(url: String, params: HashMap<String, String>?): Observable<Response> {
-        return Observable.create<Response> { o -> post(url, params, object : Callback {
-            override fun onFailure(call: Call?, e: IOException?) {
-                if (e != null) {
-          //          EventBus.publishException(e.message!!)
-                    call!!.cancel()
-                }
-            }
-
-            override fun onResponse(call: Call?, response: Response?) {
-                if (response != null) {
-                    o.onNext(response)
-                }
-                o.onComplete()
-            }
-        })
-        }
-    }
-
-
-
-
 }

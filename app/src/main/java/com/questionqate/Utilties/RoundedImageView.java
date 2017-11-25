@@ -1,4 +1,4 @@
-package com.questionqate.lib;
+package com.questionqate.Utilties;
 
 import android.content.Context;
 import android.graphics.Bitmap;

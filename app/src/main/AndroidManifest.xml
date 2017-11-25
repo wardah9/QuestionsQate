@@ -12,15 +12,15 @@
         android:roundIcon="@drawable/logo_out"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activities.MainActivity" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Activities.SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".ForgetPasswordActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".PhoneAthunticationActivity" />
+        <activity android:name=".Activities.ForgetPasswordActivity" />
+        <activity android:name=".Activities.RegistrationActivity" />
+        <activity android:name=".Activities.PhoneAthunticationActivity" />
         <activity
-            android:name=".StudentSlideMenu"
+            android:name=".Activities.StudentSlideMenu"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LevelsList.LevelsActivity" />
-        <activity android:name=".Questions.QuestionsMainView" />
+        <activity android:name=".Activities.LevelsActivity" />
+        <activity android:name=".Activities.QuestionsMainView" />
     </application>
 
 </manifest>

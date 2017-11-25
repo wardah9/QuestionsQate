@@ -1,10 +1,12 @@
-package com.questionqate;
+package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.questionqate.R;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener{
 
@@ -13,13 +15,8 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        RelativeLayout relative = (RelativeLayout) findViewById(R.id.relative);
-        relative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashScreen.this,MainActivity.class));
-            }
-        });
+        RelativeLayout relative = findViewById(R.id.relative);
+        relative.setOnClickListener(v -> startActivity(new Intent(SplashScreen.this,MainActivity.class)));
     }
 
     @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.questionqate.SplashScreen">
+    tools:context="com.questionqate.Activities.SplashScreen">
 
     <RelativeLayout
         android:background="#123"

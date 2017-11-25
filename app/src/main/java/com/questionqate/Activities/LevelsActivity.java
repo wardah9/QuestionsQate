@@ -16,6 +16,8 @@ import com.questionqate.Pojo.Question;
 
 import org.json.JSONArray;
 
+import java.util.Arrays;
+
 import io.reactivex.Observable;
 
 public class LevelsActivity extends AppCompatActivity {
@@ -29,9 +31,6 @@ public class LevelsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_levels);
         global = new Global_Strings();
 
-
-
-
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -39,7 +38,6 @@ public class LevelsActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        //  Log.d("questionArray",response.toString());
                         System.out.print(response.length());
                         for(int i=1; i<=response.length(); i++){
                             int finalI = i;
@@ -51,7 +49,7 @@ public class LevelsActivity extends AppCompatActivity {
                                     .doOnNext(e->QuestionList.getInstance().getQuestionList()
                                             .add(new Question(e.getJSONArray("Questions"),
                                                     e.getInt("StrikeTime"))))
-                                    .doOnNext(e->System.out.println(QuestionList.getInstance().getQuestionList().toArray()))
+                                    .doOnNext(e->System.out.println(Arrays.toString(QuestionList.getInstance().getQuestionList().toArray())))
                                     .subscribe();
 
                         }

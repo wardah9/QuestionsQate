@@ -34,8 +34,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.questionqate.Pojo.Student;
 import com.questionqate.R;
-import com.questionqate.modle.Student;
+
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -91,18 +92,18 @@ public class Profile extends AppCompatActivity {
                     Log.v("firbase", "key is : " + postSnapShot.getKey()
                             + " value  is " + postSnapShot.getValue());
 
-                    Student fireBaseProducts = dataSnapshot.getValue(Student.class);
+                    Student eventListener = dataSnapshot.getValue(Student.class);
                     //just to know the retrieving value
-                    assert fireBaseProducts != null;
-                    profile_name.setText(fireBaseProducts.getUserName());
-                    profile_mail.setText(fireBaseProducts.getUserEmail());
-                    profile_phone.setText(fireBaseProducts.getUserMobile());
+                    assert eventListener != null;
+                    profile_name.setText(eventListener.getUserName());
+                    profile_mail.setText(eventListener.getUserEmail());
+                    profile_phone.setText(eventListener.getUserMobile());
 
-                    baseMob = fireBaseProducts.getUserMobile();
+                    baseMob = eventListener.getUserMobile();
 
-                    profile_name_edt.setText(fireBaseProducts.getUserName());
-                    profile_mail_edt.setText(fireBaseProducts.getUserEmail());
-                    profile_phone_edt.setText(fireBaseProducts.getUserMobile());
+                    profile_name_edt.setText(eventListener.getUserName());
+                    profile_mail_edt.setText(eventListener.getUserEmail());
+                    profile_phone_edt.setText(eventListener.getUserMobile());
                 }
             }
 

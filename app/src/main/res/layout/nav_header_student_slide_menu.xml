@@ -8,14 +8,13 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <com.questionqate.Utilties.RoundedImageView
         android:layout_gravity="center"
         android:id="@+id/imageView"
         android:scaleType="fitXY"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="90dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        android:paddingTop="@dimen/nav_header_vertical_spacing" />
 
     <TextView
         android:gravity="center"

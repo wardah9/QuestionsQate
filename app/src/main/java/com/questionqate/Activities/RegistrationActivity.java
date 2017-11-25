@@ -27,50 +27,37 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText pass_reg;
     private EditText id_reg;
     private EditText retype_reg;
-//    private EditText mobile_reg;
 
     Student student;
-
-//    private DatabaseReference myRef;
-//    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-
-//        database = FirebaseDatabase.getInstance();
-//        myRef = database.getReference("Test1");
-
         uAuth = FirebaseAuth.getInstance();
 
-        name_reg = (EditText) findViewById(R.id.name_reg);
-        id_reg = (EditText) findViewById(R.id.id_reg);
-        retype_reg = (EditText) findViewById(R.id.retype_reg);
-        email_reg = (EditText) findViewById(R.id.email_reg);
-        pass_reg = (EditText) findViewById(R.id.pass_reg);
-//        mobile_reg = (EditText) findViewById(R.id.mobile_reg);
+        name_reg = findViewById(R.id.name_reg);
+        id_reg = findViewById(R.id.id_reg);
+        retype_reg = findViewById(R.id.retype_reg);
+        email_reg = findViewById(R.id.email_reg);
+        pass_reg = findViewById(R.id.pass_reg);
 
 
-        Button reg_btn = (Button) findViewById(R.id.reg_btn);
+        Button reg_btn = findViewById(R.id.reg_btn);
         reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 uAuth.createUserWithEmailAndPassword(email_reg.getText().toString(), pass_reg.getText().toString())
-                        .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Log.d("firebaseLogin", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        .addOnCompleteListener(RegistrationActivity.this, task -> {
+                            Log.d("firebaseLogin", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(RegistrationActivity.this, "register successful", Toast.LENGTH_SHORT).show();
-                                    AddUserInfo();
-                                } else
-                                    Toast.makeText(RegistrationActivity.this, "register failed ", Toast.LENGTH_SHORT).show();
-                            }
-
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegistrationActivity.this, "register successful", Toast.LENGTH_SHORT).show();
+                                AddUserInfo();
+                            } else
+                                Toast.makeText(RegistrationActivity.this, "register failed ", Toast.LENGTH_SHORT).show();
                         });
             }
 
@@ -82,10 +69,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     Intent so = new Intent(RegistrationActivity.this, PhoneAthunticationActivity.class);
                     so.putExtra("key", key);
-                    so.putExtra("name",name_reg.getText().toString());
-                    so.putExtra("id",id_reg.getText().toString());
-                    so.putExtra("email",email_reg.getText().toString());
-                    so.putExtra("pass",pass_reg.getText().toString());
+                    so.putExtra("name", name_reg.getText().toString());
+                    so.putExtra("id", id_reg.getText().toString());
+                    so.putExtra("email", email_reg.getText().toString());
+                    so.putExtra("pass", pass_reg.getText().toString());
                     startActivity(so);
 
                 } else {

@@ -7,4 +7,5 @@ package com.questionqate.Interface;
 public interface StrikeTimeInterface {
     void onStrike(int time);
     void RemoveStrike();
+    void onLevelComplete();
 }

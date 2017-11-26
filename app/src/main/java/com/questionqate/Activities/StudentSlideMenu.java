@@ -49,32 +49,32 @@ public class StudentSlideMenu extends AppCompatActivity
         subjecAdapter = new SubjectListAdapter(this);
         RecyclerView subjects_list = findViewById(R.id.subjects_list);
 
-        nav_name.findViewById(R.id.nav_name);
-        nav_email.findViewById(R.id.nav_email);
+        nav_name = findViewById(R.id.nav_name);
+        nav_email = findViewById(R.id.nav_email);
 
-        umyRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
-
-                            Log.v("firbase", "key is : " + postSnapShot.getKey()
-                                    + " value  is " + postSnapShot.getValue());
-
-                            Student firebaseStudentDetails = dataSnapshot.getValue(Student.class);
-
-                            assert firebaseStudentDetails != null;
-                            nav_name.setText(firebaseStudentDetails.getUserName());
-                            nav_email.setText(firebaseStudentDetails.getUserEmail());
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        // Failed to read value
-                        Log.w("firebase", "Failed to read data.", databaseError.toException());
-                    }
-                });
+//        umyRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
+//
+//                            Log.v("firbase", "key is : " + postSnapShot.getKey()
+//                                    + " value  is " + postSnapShot.getValue());
+//
+//                            Student firebaseStudentDetails = dataSnapshot.getValue(Student.class);
+//
+//                            assert firebaseStudentDetails != null;
+//                            nav_name.setText(firebaseStudentDetails.getUserName());
+//                            nav_email.setText(firebaseStudentDetails.getUserEmail());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        // Failed to read value
+//                        Log.w("firebase", "Failed to read data.", databaseError.toException());
+//                    }
+//                });
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         subjects_list.setLayoutManager(mLayoutManager);

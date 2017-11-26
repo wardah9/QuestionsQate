@@ -2,6 +2,7 @@ package com.questionqate.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,8 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         global = new Global_Strings();
 
-        if (sharedPreferences.getString("username", "name") != null &&
-                sharedPreferences.getString("password", "password") != null) {
+        String username = sharedPreferences.getString("username", "");
+        String password =  sharedPreferences.getString("password", "password");
+        if (username.length()>2&&password.length()>2) {
 
             userID = sharedPreferences.getString("user_id", "id");
             startActivity(new Intent(MainActivity.this, StudentSlideMenu.class).putExtra("user_id", userID));

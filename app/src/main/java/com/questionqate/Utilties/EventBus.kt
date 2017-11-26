@@ -36,6 +36,11 @@ object EventBus {
         }
     }
 
+    fun notifyCompletedQuestions(){
+        for(listener in StrikeTime){
+            listener.onLevelComplete()
+        }
+    }
     fun notifyException(message: String) {
         for(listener in ExceptionInterfaceList){
             listener.onNetworkException(message)

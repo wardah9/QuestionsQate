@@ -11,8 +11,8 @@ import android.view.WindowManager;
  */
 
 public class LoadingDialog {
-    public Dialog init(Activity context, String loading_text) {
-        Dialog dialog=new com.questionqate.Dialog.LoadingDialog(context,loading_text);
+    public com.questionqate.Dialog.LoadingDialog init(Activity context, String loading_text) {
+        com.questionqate.Dialog.LoadingDialog dialog=new com.questionqate.Dialog.LoadingDialog(context,loading_text);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.CENTER;

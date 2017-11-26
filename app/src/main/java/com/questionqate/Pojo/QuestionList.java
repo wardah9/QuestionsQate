@@ -16,7 +16,14 @@ public class QuestionList {
     private static QuestionList instance;
     public static QuestionList getInstance() {
         if (instance == null) instance = new QuestionList();
+
         return instance;
+    }
+
+
+
+    public static void setNewInstance(QuestionList questionList){
+        instance = questionList;
     }
 
     public List<Question> questionList = new ArrayList<>();

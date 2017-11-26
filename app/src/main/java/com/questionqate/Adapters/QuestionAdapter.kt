@@ -205,6 +205,7 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                             if(questions.getStatus(position+1)!=Question.questionStatus.EndOFQuestoins){
                                 questions.setStatus(position + 1, Question.questionStatus.ACTIVE)
                             }else{
+                                EventBus.notifyCompletedQuestions()
                                 holder.endOfQuestoinsText.visibility = View.VISIBLE
                             }
                             notifyItemChanged(position + 1)
@@ -275,9 +276,12 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                 val editText = EditText(mContext)
                 editText.width = holder.question_choices_layout.width
                 editText.maxLines = 1
+                var answer_id="1"
+                cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 editText.afterTextChanged {
-                    cQ = currentQuestion(questoin_id, it, "one_word")
+                    answer_id=it
                 }
+                cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 holder.question_choices_layout.addView(editText)
 
 

@@ -50,7 +50,7 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
                 String medium = "https://firebasestorage.googleapis.com/v0/b/questionsqate-9a3d7.appspot.com/o/trophy%20(6).png?alt=media&token=bda91fab-9285-4541-bd28-0bc3360b6bfc";
                 String high = "https://firebasestorage.googleapis.com/v0/b/questionsqate-9a3d7.appspot.com/o/trophy%20(2).png?alt=media&token=45dabb10-b0d9-4e98-9438-b34d3e183958";
 
-                    String level = score_achievementsData.getJSONObject(position).getString("level_name");
+                    String level = score_achievementsData.getJSONObject(position).getString("level");
                     switch (level) {
                         case "low":
                             holder.ach_level_name.setText( "LEVEL :  "+level);
@@ -65,8 +65,8 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
                             Picasso.with(context).load(high).resize(100, 100).into(holder.ach_img);
                             break;
                     }
-                    int score = score_achievementsData.getJSONObject(position).getInt("score");
-                    holder.ach_stu_score.setText("SCORE : "+score + "/ 3");
+                    int score = score_achievementsData.getJSONObject(position).getInt("strike_time");
+                    holder.ach_stu_score.setText("TIME : "+score);
 
 
                     holder.ach_share.setOnClickListener(view -> {

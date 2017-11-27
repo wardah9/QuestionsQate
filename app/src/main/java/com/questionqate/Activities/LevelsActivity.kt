@@ -40,7 +40,8 @@ class LevelsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_levels)
 
 
-        global = Global_Strings()
+        global = Global_Strings
+
         val dialog = LoadingDialog().init(this, "Loading please wait")
         dialog.show()
 

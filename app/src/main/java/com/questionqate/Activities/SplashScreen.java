@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.questionqate.R;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener{
 
@@ -16,7 +21,10 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_splash_screen);
 
         RelativeLayout relative = findViewById(R.id.relative);
-        relative.setOnClickListener(v -> startActivity(new Intent(SplashScreen.this,MainActivity.class)));
+        RxView.attaches(relative)
+                .debounce(3, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(e-> startActivity(new Intent(SplashScreen.this,MainActivity.class))).subscribe();
     }
 
     @Override

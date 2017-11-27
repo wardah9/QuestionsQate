@@ -12,6 +12,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.questionqate.Adapters.Score_AchievementsAdapter;
+import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
 
 import org.json.JSONArray;
@@ -35,6 +36,7 @@ public class Score_Achievements extends AppCompatActivity {
 
 
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getAchievements")
+                .addBodyParameter("student_id", Global_Strings.INSTANCE.getStudent_UID_firebase())
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {

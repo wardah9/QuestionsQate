@@ -21,6 +21,7 @@ import com.google.gson.JsonParser
 import com.questionqate.Adapters.QuestionAdapter
 import com.questionqate.Interface.Exceptions
 import com.questionqate.Interface.StrikeTimeInterface
+import com.questionqate.Pojo.Global_Strings
 import com.questionqate.Pojo.QuestionList
 import com.questionqate.R
 import com.questionqate.Utilties.EventBus
@@ -147,21 +148,30 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     }
 
     override fun onLevelComplete() {
-        val completeDialog = LoadingDialog().init(this, "Saving Score")
-        completeDialog.setCancelable(false)
-        completeDialog.show()
-        if(strike_counter>=3){
-            addAchivementToDatabase(completeDialog)
-        }else{
-            completeDialog.getActionButton()!!.text = "OK"
-            completeDialog.getActionButton()!!.visibility = View.VISIBLE
-            completeDialog.setResultText("Score Saved")
-            completeDialog.hideProgress()
-            completeDialog.doAction(View.OnClickListener{
+        runOnUiThread {
 
-                completeDialog.dismiss()
-                goTolevels()
-            })
+            if(strike_counter>=3){
+                val completeDialog = LoadingDialog().init(this, "Saving Score")
+                completeDialog.setCancelable(false)
+                completeDialog.show()
+                addAchivementToDatabase(completeDialog)
+            }else{
+
+
+                val completeDialog = LoadingDialog().init(this, "Saving Score")
+                completeDialog.setCancelable(false)
+                completeDialog.show()
+                completeDialog.getActionButton()!!.text = "OK"
+                completeDialog.getActionButton()!!.visibility = View.VISIBLE
+                completeDialog.setResultText("Score Saved")
+                completeDialog.hideProgress()
+                completeDialog.doAction(View.OnClickListener{
+
+                    completeDialog.dismiss()
+                    goTolevels()
+                })
+            }
+
         }
 
     }
@@ -182,7 +192,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
 
 
                 val form = FormBody.Builder()
-                form.add("student_id", "b1aVxQZcH9cFw8N8NHgizCY7Qgj1") //Todo add dynamic
+                form.add("student_id", Global_Strings.student_UID_firebase) //Todo add dynamic
                 form.add("striketime", user_strike_time.toString())
                 form.add("level", getLevelString(level))
                 form.add("subject", "java")
@@ -213,6 +223,13 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     fun goTolevels(){
        var intent =Intent(this@QuestionsMainView,LevelsActivity::class.java)
         intent.putExtra("finished_level",level)
+        startActivity(intent)
+       // finish()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent =Intent(this@QuestionsMainView,MainActivity::class.java)
         startActivity(intent)
         finish()
     }

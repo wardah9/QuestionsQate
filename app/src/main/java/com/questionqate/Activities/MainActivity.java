@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        global = new Global_Strings();
+        global = Global_Strings.INSTANCE;
 
         String username = sharedPreferences.getString("username", "");
-        String password =  sharedPreferences.getString("password", "password");
+        String password =  sharedPreferences.getString("password", "");
         if (username.length()>2&&password.length()>2) {
 
             userID = sharedPreferences.getString("user_id", "id");
@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 global.setStudent_UID_firebase(user.getUid());
                 startActivity(new Intent(MainActivity.this, StudentSlideMenu.class));
             } else {
+
 
                 global.setStudent_UID_firebase(user.getUid());
                 startActivity(new Intent(MainActivity.this, StudentSlideMenu.class));

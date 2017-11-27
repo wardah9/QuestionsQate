@@ -18,6 +18,7 @@ import com.questionqate.R
 import com.questionqate.Utilties.EventBus
 import com.questionqate.Utilties.VectorDrawableUtils
 import com.questionqate.AdditionalViews.LoadingButton
+import com.questionqate.Interface.Exceptions
 import com.questionqate.Pojo.Question
 import css.fingerprint.Networking.OkhttpObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,7 +36,6 @@ import org.json.JSONException
 
 class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
-
     data class currentQuestion(val questionId: String, val answerId: String, val questoin_type: String)
 
     var strikeSets=HashSet<Int>()
@@ -49,7 +49,7 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_questin, parent, false)
         mContext = parent.context
-
+        cQ = currentQuestion("0", "1", "")
         return ViewHolder(v)
     }
 
@@ -236,6 +236,8 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
 
         when (type) {
             "true_false" -> {
+                var answer_id="1"
+                cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 val radiogroup = RadioGroup(mContext)
 
                 val radioButtons = arrayOfNulls<RadioButton>(choices.length())
@@ -251,6 +253,9 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                 holder.question_choices_layout.addView(radiogroup)
             }
             "multiple_choice" -> {
+                var answer_id="1"
+                cQ = currentQuestion(questoin_id, answer_id, "one_word")
+
                 val answers = arrayOfNulls<CheckBox>(choices.length())
                 var student_answer_set = HashSet<String>()
 
@@ -273,14 +278,16 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                 }
             }
             "one_word" -> {
+                var answer_id="1"
+                cQ = currentQuestion(questoin_id, answer_id, "one_word")
+
                 val editText = EditText(mContext)
                 editText.width = holder.question_choices_layout.width
                 editText.maxLines = 1
-                var answer_id="1"
-                cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 editText.afterTextChanged {
                     answer_id=it
                 }
+
                 cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 holder.question_choices_layout.addView(editText)
 

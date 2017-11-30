@@ -15,138 +15,150 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/create_question_subjects_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:text="choose level :"
-                android:textSize="20dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="choose level :"
+                android:textSize="20dp" />
 
             <LinearLayout
-                android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingRight="20dp"
+                android:paddingBottom="20dp"
                 android:paddingLeft="20dp"
-                android:paddingBottom="20dp">
+                android:paddingRight="20dp"
+                android:weightSum="3">
 
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/low"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner"
                     android:text="Low"
-                    android:layout_marginRight="9dp"
-                    android:textAllCaps="false"
-                    android:background="@drawable/corner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:textAllCaps="false" />
+
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/medium"
-                    android:text="Medium"
-                    android:layout_marginRight="9dp"
-                    android:textAllCaps="false"
-                    android:background="@drawable/corner"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-                <Button
-                    android:textAllCaps="false"
-                    android:id="@+id/high"
-                    android:text="High"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="9dp"
                     android:layout_weight="1"
                     android:background="@drawable/corner"
+                    android:text="Medium"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/high"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner"
+                    android:text="High"
+                    android:textAllCaps="false" />
 
             </LinearLayout>
+
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
                 android:gravity="center"
-                android:textSize="20dp"
-                android:text="Choose Question type : " />
+                android:text="Choose Question type : "
+                android:textSize="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:weightSum="3"
-                android:paddingRight="20dp">
+                android:paddingRight="20dp"
+                android:weightSum="3">
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/type1"
-                        android:src="@drawable/true_false"
                         android:layout_width="70dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:src="@drawable/true_false" />
+
                     <TextView
-                        android:text="True/False"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="True/False" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/type2"
-                        android:src="@drawable/multiple_choice"
                         android:layout_width="70dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:src="@drawable/multiple_choice" />
+
                     <TextView
-                        android:text="Multiple Choice"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Multiple Choice" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/type3"
-                        android:src="@drawable/write"
                         android:layout_width="70dp"
-                        android:layout_height="60dp" />
+                        android:layout_height="60dp"
+                        android:src="@drawable/write" />
+
                     <TextView
-                        android:text="chort answer"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="chort answer" />
                 </LinearLayout>
             </LinearLayout>
 
 
             <EditText
-                android:hint="Question here"
-                android:visibility="gone"
                 android:id="@+id/question_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:inputType="textMultiLine|textCapSentences|textAutoCorrect" />
+                android:hint="Question here"
+                android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/answer_content"
@@ -154,45 +166,53 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="50dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
-                    android:text = "choose the correct answer :"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:text="choose the correct answer :" />
 
                 <RadioGroup
                     android:id="@+id/true_false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <RadioButton
                         android:id="@+id/one"
-                        android:text="True"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:text="True" />
+
                     <RadioButton
                         android:id="@+id/two"
-                        android:text="False"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:text="False" />
                 </RadioGroup>
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/multiple_answer"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:paddingRight="20dp"
+                    android:paddingStart="30dp"
+                    android:visibility="gone"
                     android:id="@+id/what"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:text="Number of answers"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Number of answers" />
+
                     <EditText
                         android:id="@+id/noOfAnswers"
                         android:layout_width="90dp"
@@ -200,21 +220,24 @@
 
                     <Button
                         android:id="@+id/add_answers_list"
-                        android:text="Add answers"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Add answers" />
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:id="@+id/answers"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <Button
-                android:layout_marginTop="30dp"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/corner"
                 android:onClick="AddToFirebase"
                 android:text="Add"

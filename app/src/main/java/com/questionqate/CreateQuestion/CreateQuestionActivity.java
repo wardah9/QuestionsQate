@@ -19,7 +19,7 @@ import com.questionqate.R;
 
 public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText question_edt;
+    EditText question_edt,shortAnswer;
     LinearLayout answer_content, what;
 
     Button medium, low, high;
@@ -47,6 +47,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
 
 
         question_edt = findViewById(R.id.question_edt);
+        shortAnswer = findViewById(R.id.shortAnswer);
         answer_content = findViewById(R.id.answer_content);
         what = findViewById(R.id.what);
 
@@ -71,18 +72,21 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.VISIBLE);
                 what.setVisibility(View.GONE);
+                shortAnswer.setVisibility(View.GONE);
                 break;
 
             case R.id.type2:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
                 what.setVisibility(View.VISIBLE);
+                shortAnswer.setVisibility(View.GONE);
                 break;
 
             case R.id.type3:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
                 what.setVisibility(View.GONE);
+                shortAnswer.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.medium: {

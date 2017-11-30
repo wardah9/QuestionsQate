@@ -32,7 +32,9 @@ class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var c
 
         holder.subject_name_view.text = subjects.get(position).asJsonObject.get("name").asString
         Picasso.with(context).load(subjects.get(position).asJsonObject.get("imageURL").asString).into(  holder.subject_image_view)
-
+        holder.subjet_card.setOnClickListener {
+          //  holder.subjet_card.bo
+        }
 
     }
 

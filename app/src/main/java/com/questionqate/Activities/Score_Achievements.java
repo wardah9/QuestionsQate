@@ -12,6 +12,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.questionqate.Adapters.Score_AchievementsAdapter;
+import com.questionqate.AdditionalViews.LoadingButton;
+import com.questionqate.Dialog.LoadingDialog;
 import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
 
@@ -34,6 +36,9 @@ public class Score_Achievements extends AppCompatActivity {
         achievements_score_list.setItemAnimator(new DefaultItemAnimator());
 //        achievements_score_list.setHasFixedSize(true);
 
+        LoadingDialog dialog = new LoadingDialog(this,"Loading.. please wait!");
+        dialog.setCancelable(false);
+        dialog.show();
 
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getAchievements")
                 .addBodyParameter("student_id", Global_Strings.INSTANCE.getStudent_UID_firebase())
@@ -43,7 +48,10 @@ public class Score_Achievements extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        achievements_score_list.setAdapter(new Score_AchievementsAdapter(Score_Achievements.this,response));
+                        achievements_score_list.setAdapter(
+                                new Score_AchievementsAdapter(Score_Achievements.this,response));
+
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -53,11 +61,6 @@ public class Score_Achievements extends AppCompatActivity {
                 });
 
     }
-
-//    private LinearLayoutManager getLinearLayoutManager() {
-//        return new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//    }
-
 }
 
 

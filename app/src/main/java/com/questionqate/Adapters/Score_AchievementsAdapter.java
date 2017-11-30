@@ -53,21 +53,24 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
                     String level = score_achievementsData.getJSONObject(position).getString("level");
                     switch (level) {
                         case "low":
-                            holder.ach_level_name.setText( "LEVEL :  "+level);
+                            holder.ach_level_name.setText( "Level :  "+level);
                             Picasso.with(context).load(low).into(holder.ach_img);
                             break;
                         case "medium":
-                            holder.ach_level_name.setText( "LEVEL :  "+level );
+                            holder.ach_level_name.setText( "Level :  "+level );
                             Picasso.with(context).load(medium).resize(100, 100).into(holder.ach_img);
                             break;
                         case "high":
-                            holder.ach_level_name.setText( "LEVEL :  "+level);
+                            holder.ach_level_name.setText( "Level :  "+level);
                             Picasso.with(context).load(high).resize(100, 100).into(holder.ach_img);
                             break;
                     }
-                    int score = score_achievementsData.getJSONObject(position).getInt("strike_time");
-                    holder.ach_stu_score.setText("TIME : "+score);
+                    int strike_time = score_achievementsData.getJSONObject(position).getInt("strike_time");
+                    holder.ach_stu_time.setText("Strike Time : "+strike_time);
 
+
+                    String subject = score_achievementsData.getJSONObject(position).getString("subject");
+                    holder.ach_stu_sub.setText("Subject : "+ subject);
 
                     holder.ach_share.setOnClickListener(view -> {
 
@@ -98,6 +101,7 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
             return null;
         }
         // Store image to default external storage directory
+        //TODO: storage permission handler
         Uri bmpUri = null;
         try {
             File file =  new File(Environment.getExternalStoragePublicDirectory(
@@ -123,7 +127,8 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
         ImageView ach_img;
         ImageView ach_share;
         TextView ach_level_name;
-        TextView ach_stu_score;
+        TextView ach_stu_time;
+        TextView ach_stu_sub;
 
         public Score_Achievement_Holder(View itemView) {
             super(itemView);
@@ -131,7 +136,8 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
             ach_img = itemView.findViewById(R.id.ach_img);
             ach_share = itemView.findViewById(R.id.ach_share);
             ach_level_name = itemView.findViewById(R.id.ach_level_name);
-            ach_stu_score = itemView.findViewById(R.id.ach_stu_score);
+            ach_stu_time = itemView.findViewById(R.id.ach_stu_time);
+            ach_stu_sub =itemView.findViewById(R.id.ach_stu_sub);
         }
     }
 }

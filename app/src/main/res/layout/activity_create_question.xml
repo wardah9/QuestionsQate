@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#edf0f4"
+    tools:context=".CreateQuestion.CreateQuestionActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="choose level :"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp">
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/low"
+                    android:text="Low"
+                    android:layout_marginRight="9dp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/corner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/medium"
+                    android:text="Medium"
+                    android:layout_marginRight="9dp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/corner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:textAllCaps="false"
+                    android:id="@+id/high"
+                    android:text="High"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:text="Choose Question type : " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:weightSum="3"
+                android:paddingRight="20dp">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/type1"
+                        android:src="@drawable/true_false"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp" />
+                    <TextView
+                        android:text="True/False"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/type2"
+                        android:src="@drawable/multiple_choice"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp" />
+                    <TextView
+                        android:text="Multiple Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/type3"
+                        android:src="@drawable/write"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp" />
+                    <TextView
+                        android:text="chort answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <EditText
+                android:hint="Question here"
+                android:visibility="gone"
+                android:id="@+id/question_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:inputType="textMultiLine|textCapSentences|textAutoCorrect" />
+
+            <LinearLayout
+                android:id="@+id/answer_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="50dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:text = "choose the correct answer :"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <RadioGroup
+                    android:id="@+id/true_false"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RadioButton
+                        android:id="@+id/one"
+                        android:text="True"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <RadioButton
+                        android:id="@+id/two"
+                        android:text="False"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_marginTop="30dp"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/corner"
+                android:onClick="AddToFirebase"
+                android:text="Add"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

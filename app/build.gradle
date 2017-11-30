@@ -66,7 +66,6 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'me.ithebk:barchart:0.9'
 
-
     //timeline
     compile 'com.github.vipulasri:timelineview:1.0.5'
 

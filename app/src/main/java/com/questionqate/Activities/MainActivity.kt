@@ -16,6 +16,7 @@ import com.google.gson.JsonParser
 import com.questionqate.Pojo.Global_Strings
 import com.questionqate.Pojo.Teacher
 import com.questionqate.R
+import com.questionqate.Utilties.LoadingDialog
 import css.fingerprint.Networking.OkhttpObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -88,19 +89,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         form.add("email", email.text.trim().toString())
         form.add("password", pass.text.trim().toString())
 
+       var dialog = LoadingDialog().init(this,"Please wait");
+        dialog.show()
         OkhttpObservable.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/checkIfTeacher", form)
                 .subscribeOn(Schedulers.io())
                 .map { response -> JsonParser().parse(response.body()!!.string()) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { e ->
                     run {
+
                         if (e.asJsonObject.get("isTeacher").asBoolean) {
+                            dialog.hide()
                             if (!e.asJsonObject.get("auth").asBoolean) {
                                 Toast.makeText(this@MainActivity, " Wrong Email or Password", Toast.LENGTH_LONG).show()
                             } else {
 
                                 System.out.println( e.asJsonObject.get("t_subjects").asJsonArray)
-
                                 Teacher.currentTeacher = Teacher.teacherInfo(
                                         e.asJsonObject.get("t_subjects").asJsonArray,
                                         e.asJsonObject.get("t_name").asString,
@@ -117,10 +121,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                             Toast.makeText(this@MainActivity,
                                                     "Login failed",
                                                     Toast.LENGTH_SHORT).show()
+                                            dialog.hide()
                                         } else {
                                             Toast.makeText(this@MainActivity,
                                                     "Login success ",
                                                     Toast.LENGTH_SHORT).show()
+                                            dialog.hide()
                                             getUID()
 
                                         }

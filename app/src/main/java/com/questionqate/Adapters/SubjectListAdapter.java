@@ -1,5 +1,6 @@
 package com.questionqate.Adapters;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -27,9 +28,9 @@ import com.questionqate.R;
 
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.SubjectList_holder> {
 
-    Context context1;
+    Activity context1;
 
-    public SubjectListAdapter(Context context) {
+    public SubjectListAdapter(Activity context) {
 
         this.context1 = context;
     }
@@ -43,9 +44,16 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     @Override
     public void onBindViewHolder(SubjectList_holder holder, final int position) {
 
+
         holder.subjet_card.setOnClickListener(v -> {
-            if (position == 0)
-                context1.startActivity(new Intent(context1, LevelsActivity.class));
+            if (position == 0){
+
+                Intent intent=  new Intent(context1, LevelsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                context1.startActivity(intent);
+                context1.finish();
+            }
 
         });
     }

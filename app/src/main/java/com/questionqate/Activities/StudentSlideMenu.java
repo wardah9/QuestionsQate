@@ -46,7 +46,7 @@ public class StudentSlideMenu extends AppCompatActivity
         FirebaseDatabase udatabase = FirebaseDatabase.getInstance();
         DatabaseReference umyRef = udatabase.getReference("My_students");
 
-        subjecAdapter = new SubjectListAdapter(this);
+        subjecAdapter = new SubjectListAdapter(StudentSlideMenu.this);
         RecyclerView subjects_list = findViewById(R.id.subjects_list);
 
         nav_name = findViewById(R.id.nav_name);
@@ -97,7 +97,8 @@ public class StudentSlideMenu extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+          //  super.onBackPressed();
         }
     }
 
@@ -111,6 +112,7 @@ public class StudentSlideMenu extends AppCompatActivity
 
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(StudentSlideMenu.this, Profile.class));
+
 
         } else if (id == R.id.nav_share) {
             ShareMyApp();

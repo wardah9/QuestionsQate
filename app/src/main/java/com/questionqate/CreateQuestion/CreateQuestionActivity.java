@@ -2,6 +2,8 @@ package com.questionqate.CreateQuestion;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.questionqate.Adapters.TeacherSubjectListAdapter;
+import com.questionqate.Pojo.Teacher;
 import com.questionqate.R;
 
 public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,12 +25,21 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
     Button medium, low, high;
     ImageView type1,type2,type3;
 
-    LinearLayout what;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
+
+        recyclerView = findViewById(R.id.create_question_subjects_recycler_view);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(),this));
+
+
+
+
 
         medium = findViewById(R.id.medium);
         low = findViewById(R.id.low);
@@ -36,9 +49,9 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
         type3 = findViewById(R.id.type3);
 
 
+
         question_edt = findViewById(R.id.question_edt);
         answer_content = findViewById(R.id.answer_content);
-        what = findViewById(R.id.what);
 
         medium.setOnClickListener(this);
         low.setOnClickListener(this);
@@ -60,19 +73,16 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
             case R.id.type1:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.VISIBLE);
-                what.setVisibility(View.GONE);
                 break;
 
             case R.id.type2:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
-                what.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.type3:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
-                what.setVisibility(View.GONE);
                 break;
 
             case R.id.medium: {

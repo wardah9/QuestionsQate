@@ -7,10 +7,9 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/subjet_card"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="170dp"
         android:layout_weight="0.9"
-        android:layout_margin="10dp"
         android:background="#00112233">
 
         <RelativeLayout
@@ -19,23 +18,23 @@
             android:orientation="vertical">
 
             <ImageView
-                android:scaleType="fitXY"
-                android:src="@drawable/java"
                 android:id="@+id/subject_image_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/java" />
 
             <TextView
-                android:background="#8e6f7479"
-                android:text="JAVA"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#1a355c"
-                android:layout_alignParentBottom="true"
                 android:id="@+id/subject_name_view"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="#8e6f7479"
+                android:gravity="center"
+                android:text="JAVA"
+                android:textColor="#1a355c"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
 

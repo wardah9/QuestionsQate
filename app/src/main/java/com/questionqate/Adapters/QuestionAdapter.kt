@@ -58,10 +58,6 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
 
         try {
 
-            //if(questions.questions)
-
-
-
 
             if (questions.questionStatus(position) == Question.questionStatus.ACTIVE) {
                 //  holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_inactive, android.R.color.darker_gray));
@@ -106,13 +102,6 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
 
 
             }
-            //else if (questions.questionStatus(position) == Question.questionStatus.COMPLETED) {
-//
-//                changeHightWithAnimiation(holder.question_choices_layout)
-//                changeHightWithAnimiation(holder.question_text)
-//                holder.question_btn_next.isEnabled = false
-//
-//            }
             holder.question_btn_next.setOnClickListener { listener ->
                 holder.question_chronometer.stop()
                 onNextQuestion(holder, position)
@@ -211,12 +200,6 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                             notifyItemChanged(position + 1)
                         }
 
-
-                        // setQuestionStatus(holder, questions.questionStatus(position))
-
-                        //}else{
-                        //  questions.setStatus(position, Question.questionStatus.COMPLETED)
-                        // }
                         System.out.println("current length =" + itemCount + " position " + position)
 
 

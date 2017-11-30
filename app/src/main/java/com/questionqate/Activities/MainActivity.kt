@@ -99,8 +99,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 Toast.makeText(this@MainActivity, " Wrong Email or Password", Toast.LENGTH_LONG).show()
                             } else {
 
-                                Teacher.currentTeacher = Teacher.teacherInfo(e.asJsonObject.get("subjects").asJsonArray,
-                                        e.asJsonObject.get("t_name").asString, e.asJsonObject.get("t_id").asInt)
+                                System.out.println( e.asJsonObject.get("t_subjects").asJsonArray)
+
+                                Teacher.currentTeacher = Teacher.teacherInfo(
+                                        e.asJsonObject.get("t_subjects").asJsonArray,
+                                        e.asJsonObject.get("t_name").asString,
+                                        e.asJsonObject.get("t_id").asInt)
 
                                 startActivity(Intent(this@MainActivity, LecturerHome::class.java))
                             }

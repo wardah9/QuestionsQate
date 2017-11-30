@@ -20,7 +20,7 @@ import com.questionqate.R;
 public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText question_edt;
-    LinearLayout answer_content;
+    LinearLayout answer_content, what;
 
     Button medium, low, high;
     ImageView type1,type2,type3;
@@ -37,10 +37,6 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(),this));
 
-
-
-
-
         medium = findViewById(R.id.medium);
         low = findViewById(R.id.low);
         high = findViewById(R.id.high);
@@ -52,6 +48,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
 
         question_edt = findViewById(R.id.question_edt);
         answer_content = findViewById(R.id.answer_content);
+        what = findViewById(R.id.what);
 
         medium.setOnClickListener(this);
         low.setOnClickListener(this);
@@ -73,16 +70,19 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
             case R.id.type1:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.VISIBLE);
+                what.setVisibility(View.GONE);
                 break;
 
             case R.id.type2:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
+                what.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.type3:
                 question_edt.setVisibility(View.VISIBLE);
                 answer_content.setVisibility(View.GONE);
+                what.setVisibility(View.GONE);
                 break;
 
             case R.id.medium: {

@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.JsonParser
+import com.jakewharton.rxbinding2.view.RxView
 import com.questionqate.Adapters.QuestionAdapter
 import com.questionqate.Interface.Exceptions
 import com.questionqate.Interface.StrikeTimeInterface
@@ -28,12 +29,16 @@ import com.questionqate.Utilties.EventBus
 import com.questionqate.Utilties.LoadingDialog
 import css.fingerprint.Networking.OkhttpObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.internal.operators.observable.ObservableTimer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_questions_list.*
 import kotlinx.android.synthetic.main.dialogloading.*
 import okhttp3.FormBody
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     override fun onNetworkException(e: String) {
@@ -71,16 +76,50 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         mRecyclerView!!.setHasFixedSize(true)
 
         currentCOunter = QuestionList.getInstance().getQuestionList()[0].strikeTime
-        val textCounter = "Level Strike Time " + "00:" + f.format(currentCOunter.toLong())
+        val textCounter = "Level Strike Time 00: ${f.format(currentCOunter.toLong())}"
         counter_textview.text = textCounter
 
-        val textCounter2 = "Your Strike Time " + "00:00"
+        val textCounter2 = "Your Strike Time 00:00"
         user_counter_textview.text = textCounter2
 
 
 
         mRecyclerView!!.adapter = QuestionAdapter(QuestionList.getInstance().getQuestionList()[level])
         chrono_counter.start()
+        startLevelCountDown(currentCOunter)
+
+
+    }
+
+    fun startLevelCountDown(levelCounter: Int){
+
+       var timeooutTimer = 10
+       var showlayoutOnce = true
+
+       var timer = ObservableTimer.interval(0,1,TimeUnit.SECONDS)
+        timer.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { e-> f.format((levelCounter - e))  }
+                .subscribe({
+                    e-> run {
+                        if (e.toInt() <0) {
+                            if(showlayoutOnce){
+                                mRecyclerView!!.visibility = View.GONE
+                                mRecyclerView!!.adapter = null
+                                question_timeout_layout.visibility = View.VISIBLE
+                                showlayoutOnce = false
+                            }
+                            questions_going_back_txt.text = "Going back to levels page in $timeooutTimer"
+                            if(timeooutTimer==0){
+                                goTolevels()
+                            }
+                            timeooutTimer--
+                        }else{
+                            counter_textview.text = "Level Strike Time 00:$e"
+                        }
+                    }
+
+                })
 
 
     }
@@ -91,8 +130,8 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         //Getting the View object as defined in the customtoast.xml file
         val layout = li.inflate(R.layout.achivement,
                 findViewById<ViewGroup>(R.id.achievement_layout))
-        val level = layout.findViewById<View>(R.id.achivement_level_text) as TextView
-        level.text = "test"
+        val currentLevel = layout.findViewById<View>(R.id.achivement_level_text) as TextView
+        currentLevel.text = getLevelString(level = level)
 
         //Creating the Toast object
         val toast = Toast(applicationContext)
@@ -125,7 +164,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
 
     override fun onStrike(time: Int) {
         user_strike_time = user_strike_time + time
-        val strike = "Your Strike Time " + "00:" + f.format(user_strike_time.toLong())
+        val strike = "Your Strike Time 00:${f.format(user_strike_time.toLong())}"
         user_counter_textview.text = strike
         strike_counter++
         if (strike_counter == 3) {
@@ -140,7 +179,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         if (strike_counter != 3) {
             // u reached to achivement
             user_strike_time = 0
-            val strike = "Your Strike Time " + "00:" + f.format(user_strike_time.toLong())
+            val strike = "Your Strike Time 00:${f.format(user_strike_time.toLong())}"
             user_counter_textview.text = strike
             strike_counter = 0
         }
@@ -151,16 +190,20 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         runOnUiThread {
 
             if(strike_counter>=3){
-                val completeDialog = LoadingDialog().init(this, "Saving Score")
+                val completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
                 completeDialog.setCancelable(false)
-                completeDialog.show()
+                if(!isFinishing){
+                    completeDialog.show()
+                }
                 addAchivementToDatabase(completeDialog)
             }else{
 
 
-                val completeDialog = LoadingDialog().init(this, "Saving Score")
+                val completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
                 completeDialog.setCancelable(false)
-                completeDialog.show()
+                if(!isFinishing){
+                    completeDialog.show()
+                }
                 completeDialog.getActionButton()!!.text = "OK"
                 completeDialog.getActionButton()!!.visibility = View.VISIBLE
                 completeDialog.setResultText("Score Saved")
@@ -223,15 +266,16 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     fun goTolevels(){
        var intent =Intent(this@QuestionsMainView,LevelsActivity::class.java)
         intent.putExtra("finished_level",level)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
        // finish()
+       // onBackPressed()
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        var intent =Intent(this@QuestionsMainView,MainActivity::class.java)
-        startActivity(intent)
-        finish()
+
+       // finish()
+     //   super.onBackPressed()
     }
 
 }

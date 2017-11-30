@@ -10,10 +10,13 @@ import com.questionqate.R;
 
 public class LecturerHome extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer_home);
+
+
     }
 
     public void createQuestion(View view) {

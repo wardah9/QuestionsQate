@@ -278,17 +278,21 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
                 }
             }
             "one_word" -> {
-                var answer_id="1"
-                cQ = currentQuestion(questoin_id, answer_id, "one_word")
+//                var answer_id="1"
+//                cQ = currentQuestion(questoin_id, answer_id, "one_word")
 
                 val editText = EditText(mContext)
                 editText.width = holder.question_choices_layout.width
                 editText.maxLines = 1
                 editText.afterTextChanged {
-                    answer_id=it
+                    if(it.length>0){
+                        cQ = currentQuestion(questoin_id, it.trim(), "one_word")
+                    }else{
+                        cQ = currentQuestion("0", "1", "one_word")
+
+                    }
                 }
 
-                cQ = currentQuestion(questoin_id, answer_id, "one_word")
                 holder.question_choices_layout.addView(editText)
 
 

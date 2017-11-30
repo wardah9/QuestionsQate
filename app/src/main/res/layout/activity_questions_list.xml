@@ -61,6 +61,7 @@
                 android:textAlignment="gravity"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20sp" />
+
         </FrameLayout>
 
     </LinearLayout>
@@ -76,6 +77,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:visibility="visible">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/question_timeout_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:gravity="top|center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="You did not complete the level on time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#777d84" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="178dp"
+            android:layout_height="172dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/stopwatch" />
+
+        <TextView
+            android:id="@+id/questions_going_back_txt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:text="Going back to level in "
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>
 
 </LinearLayout>

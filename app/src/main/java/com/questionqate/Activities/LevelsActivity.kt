@@ -120,16 +120,39 @@ class LevelsActivity : AppCompatActivity() {
 
     fun OnLowLevelClicked(view: View) {
         global.level_status = "low"
-        startActivity(Intent(this, QuestionsMainView::class.java).putExtra("level", 0))
+        var lowlevel_intent= Intent(this, QuestionsMainView::class.java)
+        lowlevel_intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+        lowlevel_intent.putExtra("level", 0)
+        startActivity(lowlevel_intent)
+        finish()
     }
 
     fun OnMediumLevelClicked(view: View) {
         global.level_status = "medium"
-        startActivity(Intent(this, QuestionsMainView::class.java).putExtra("level", 1))
+        var intent= Intent(this, QuestionsMainView::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.putExtra("level", 1)
+        startActivity(intent)
+        finish()
+
     }
 
     fun OnHighLevelClicked(view: View) {
         global.level_status = "high"
-        startActivity(Intent(this, QuestionsMainView::class.java).putExtra("level", 2))
+        var intent= Intent(this, QuestionsMainView::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.putExtra("level", 2)
+        startActivity(intent)
+        finish()
+
+    }
+
+    override fun onBackPressed() {
+        var intent =Intent(this@LevelsActivity,StudentSlideMenu::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+
+
     }
 }

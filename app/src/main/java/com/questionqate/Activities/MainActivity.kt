@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.JsonParser
 import com.questionqate.Pojo.Global_Strings
+import com.questionqate.Pojo.QuestionHelper
 import com.questionqate.Pojo.Teacher
 import com.questionqate.R
 import com.questionqate.Utilties.LoadingDialog
@@ -21,6 +22,8 @@ import css.fingerprint.Networking.OkhttpObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.FormBody
+import org.json.JSONArray
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         global = Global_Strings
@@ -73,6 +78,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         rememberMe!!.setOnCheckedChangeListener { buttonView, isChecked ->
             check = isChecked
         }
+
+//        var jsonArray = JSONArray()
+//
+//        jsonArray.put(JSONObject().put("test","test"))
+//
+//        var cr = QuestionHelper.currentQuestion("test", "true_fals", jsonArray)
+//
+//        QuestionHelper.toApi(cr)
 
     }
 

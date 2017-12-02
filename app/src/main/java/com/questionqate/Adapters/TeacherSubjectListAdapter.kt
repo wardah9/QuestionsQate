@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.google.gson.JsonArray
+import com.questionqate.Pojo.QuestionHelper
 
 import com.questionqate.Pojo.ViewState
 import com.questionqate.Pojo.ViewState.Subject_CardView_States
@@ -51,6 +52,7 @@ class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var c
         holder.subjet_card.setOnClickListener {
             holder.border.setBackgroundResource(R.drawable.border)
             setStatus(position)
+            QuestionHelper.subject_name = subjects.get(position).asJsonObject.get("name").asString
             notifyDataSetChanged()
         }
 

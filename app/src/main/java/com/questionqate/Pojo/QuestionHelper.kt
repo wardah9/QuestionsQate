@@ -9,7 +9,10 @@ import org.json.JSONObject
 
 object QuestionHelper {
 
-    data class currentQuestion(var subject_name: String, var level_id: String,var question: String,
+    var subject_name: String = ""
+    var level_id: String = ""
+
+    data class currentQuestion(var question: String,
                                var question_type: String,var choice: JSONArray)
 
 

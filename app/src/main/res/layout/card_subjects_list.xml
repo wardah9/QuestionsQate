@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -9,9 +10,11 @@
         android:layout_width="110dp"
         android:layout_height="130dp"
         android:layout_marginRight="4dp"
-        android:background="#00112233">
+        android:background="#00112233"
+   >
 
         <RelativeLayout
+            android:id="@+id/card_subject_border"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -20,7 +23,7 @@
                 android:id="@+id/subject_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside" />
 
             <TextView
                 android:id="@+id/subject_name_view"

@@ -20,20 +20,17 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-
-
-    compile 'com.android.support:appcompat-v7:27.+'
+    compile 'com.android.support:appcompat-v7:27.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -41,41 +38,30 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.0.1'
     implementation 'com.android.support:cardview-v7:27.0.1'
     compile 'com.eyalbira.loadingdots:loading-dots:1.0.2'
-
     //firebase
     compile 'com.google.firebase:firebase-auth:11.0.2'
     compile 'com.google.firebase:firebase-database:11.0.2'
     compile 'com.firebaseui:firebase-ui-database:1.0.1'
     compile 'com.google.firebase:firebase-storage:11.0.2'
-
     //kotline
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
     // rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.5'
     compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-
     //networking
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.amitshekhar.android:android-networking:1.0.0'
-
     // Other
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.4'
     compile 'me.ithebk:barchart:0.9'
-
     //timeline
     compile 'com.github.vipulasri:timelineview:1.0.5'
-
-
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-
     testCompile 'junit:junit:4.12'
-
-
 }
 apply plugin: 'com.google.gms.google-services'
 repositories {

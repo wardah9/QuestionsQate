@@ -1,5 +1,7 @@
 package com.questionqate.Pojo
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -30,10 +32,22 @@ object QuestionHelper {
         return choice
     }
 
-    fun toString(currentQuestion: currentQuestion): String {
-        return currentQuestion.toString()
+
+    fun toApi(currentQuestion: currentQuestion) {
+
+        var toAPi = JSONObject()
+        toAPi.put("subject_name", subject_name)
+        toAPi.put("level_id", level_id)
+        toAPi.put("question",currentQuestion.question)
+        toAPi.put("question_type",currentQuestion.question_type)
+        toAPi.put("choices",currentQuestion.choice)
+    }
+
+    fun sendQuestionToAPI(){
+
     }
 
 
 
 }
+

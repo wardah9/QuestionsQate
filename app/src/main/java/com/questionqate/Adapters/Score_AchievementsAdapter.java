@@ -3,16 +3,20 @@ package com.questionqate.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.questionqate.R;
 import com.squareup.picasso.Picasso;
@@ -20,9 +24,13 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_AchievementsAdapter.Score_Achievement_Holder> {
 
@@ -79,9 +87,10 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
                             Intent share = new Intent(Intent.ACTION_SEND);
                             share.setType("image/*");
                             share.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                            share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out from Questions Gate applicatio ..");
+                            share.putExtra(Intent.EXTRA_TEXT, "I got something cool! , i have maximum score On " + level + " level \n check it out from Questions Gate application ..");
                             context.startActivity(Intent.createChooser(share, "Share Your Achievement !"));
-                        }
+                        }else
+                            Toast.makeText(context, "unknowing", Toast.LENGTH_SHORT).show();
                     });
 
             }
@@ -101,7 +110,6 @@ public class Score_AchievementsAdapter extends RecyclerView.Adapter<Score_Achiev
             return null;
         }
         // Store image to default external storage directory
-        //TODO: storage permission handler
         Uri bmpUri = null;
         try {
             File file =  new File(Environment.getExternalStoragePublicDirectory(

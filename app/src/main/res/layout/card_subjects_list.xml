@@ -19,7 +19,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <pl.droidsonroids.gif.GifImageView
+                android:src="@drawable/loading1"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/subject_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

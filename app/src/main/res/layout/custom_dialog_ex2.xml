@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/iesi"
-            android:textStyle="bold|italic"
-            android:textSize="20dp"
-            android:text="Please choose a picture .. "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_height="wrap_content" />
+            android:text="Please choose a picture .. "
+            android:textSize="20dp"
+            android:textStyle="bold|italic" />
+
         <Button
-            android:text="Camera"
-            android:layout_below="@+id/iesi"
-            android:onClick="onCameraLaunched"
             android:id="@+id/cc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iesi"
+            android:onClick="onCameraLaunched"
+            android:text="Camera" />
+
         <Button
-            android:layout_width="wrap_content"
-            android:text="Gallery"
             android:id="@+id/gg"
-            android:onClick="onGalleryLaunched"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iesi"
-            android:layout_toRightOf="@+id/cc"/>
+            android:layout_toRightOf="@+id/cc"
+            android:onClick="onGalleryLaunched"
+            android:text="Gallery" />
 
     </RelativeLayout>
-
-
 
 </LinearLayout>

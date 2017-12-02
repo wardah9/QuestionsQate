@@ -19,42 +19,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:text="choose Subject :"
                 android:textSize="20dp" />
 
             <LinearLayout
-                android:layout_marginLeft="20dp"
+                android:id="@+id/subjectlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:layout_marginLeft="20dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/create_question_subjects_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible" />
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:text="choose level :"
                 android:textSize="20dp" />
 
             <LinearLayout
+                android:id="@+id/levelslist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:weightSum="3">
 
                 <Button
@@ -91,14 +90,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Choose Question type : "
                 android:textSize="20dp" />
 
             <LinearLayout
+                android:id="@+id/questionstypelist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -214,13 +214,13 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:paddingRight="20dp"
-                    android:paddingStart="30dp"
-                    android:visibility="gone"
                     android:id="@+id/what"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingRight="20dp"
+                    android:paddingStart="30dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -241,19 +241,20 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:gravity="right"
+                    android:layout_margin="20dp"
                     android:id="@+id/answers"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
 
                 <EditText
-                    android:paddingRight="20dp"
-                    android:paddingStart="30dp"
-                    android:visibility="gone"
-                    android:hint="answer here"
                     android:id="@+id/shortAnswer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:hint="answer here"
+                    android:layout_margin="20dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

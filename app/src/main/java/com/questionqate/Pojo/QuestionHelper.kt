@@ -33,6 +33,12 @@ object QuestionHelper {
     }
 
 
+    fun toJson(currentQuestion: currentQuestion){
+        val gson = GsonBuilder().setPrettyPrinting().create()
+        val jsonPerson: String = gson.toJson(currentQuestion)
+        System.out.println(jsonPerson)
+
+    }
     fun toApi(currentQuestion: currentQuestion) {
 
         var toAPi = JSONObject()

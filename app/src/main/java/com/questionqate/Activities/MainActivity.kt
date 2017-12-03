@@ -80,12 +80,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
 //        var jsonArray = JSONArray()
-//
-//        jsonArray.put(JSONObject().put("test","test"))
-//
-//        var cr = QuestionHelper.currentQuestion("test", "true_fals", jsonArray)
-//
-//        QuestionHelper.toApi(cr)
+
+  //      jsonArray.put(JSONObject().put("test","test"))
+
+    //    var cr = QuestionHelper.currentQuestion("test", "true_fals", jsonArray)
+
+      //  QuestionHelper.toApi(cr)
 
     }
 

@@ -1,7 +1,5 @@
 package com.questionqate.Pojo
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -15,7 +13,8 @@ object QuestionHelper {
     var level_id: String = ""
 
     data class currentQuestion(var question: String,
-                               var question_type: String,var choice: JSONArray)
+                               var question_type: String, var choice: JSONArray, var correctAnswerid: JSONArray)
+
 
 
     fun addChoice(id:Int, choice:String) : JSONObject{
@@ -47,6 +46,8 @@ object QuestionHelper {
         toAPi.put("question",currentQuestion.question)
         toAPi.put("question_type",currentQuestion.question_type)
         toAPi.put("choices",currentQuestion.choice)
+        toAPi.put("correct_answers",currentQuestion.correctAnswerid)
+        System.out.println(" current question "+toAPi.toString())
     }
 
     fun sendQuestionToAPI(){

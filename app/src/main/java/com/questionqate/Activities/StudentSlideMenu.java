@@ -1,6 +1,9 @@
 package com.questionqate.Activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -37,6 +40,7 @@ public class StudentSlideMenu extends AppCompatActivity
     SubjectListAdapter subjecAdapter;
     TextView nav_name;
     TextView nav_email;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class StudentSlideMenu extends AppCompatActivity
         setContentView(R.layout.activity_student_slide_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
         FirebaseDatabase udatabase = FirebaseDatabase.getInstance();
@@ -101,10 +107,11 @@ public class StudentSlideMenu extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             finish();
-          //  super.onBackPressed();
+            //  super.onBackPressed();
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -118,6 +125,18 @@ public class StudentSlideMenu extends AppCompatActivity
 
 
         } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_exit) {
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
 
         }
 

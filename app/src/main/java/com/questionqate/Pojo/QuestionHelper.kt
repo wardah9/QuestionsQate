@@ -78,8 +78,8 @@ object QuestionHelper {
 //                .observeOn(AndroidSchedulers.mainThread()) // when the request is completed bring the result to main thread or GUI
 //                .doOnNext { e-> System.out.println("addd question ${e}") }
 //                .subscribe()
-
     }
+
 
     fun sendQuestionToAPI() {
 

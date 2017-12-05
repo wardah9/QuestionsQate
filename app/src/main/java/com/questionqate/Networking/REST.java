@@ -68,6 +68,7 @@ public class REST {
     public void post(String url, FormBody.Builder builder, Callback callback) {
 
         Request request = new Request.Builder()
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .url(url)
                 .post(builder.build())
                 .build();

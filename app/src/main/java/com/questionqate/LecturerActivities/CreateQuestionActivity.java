@@ -26,6 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Normalizer;
+
+import css.fingerprint.Networking.OkhttpObservable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.FormBody;
+
 public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText question_edt, shortAnswer, noOfAnswers;
@@ -119,15 +126,16 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                QuestionHelper.INSTANCE.toApi(cr);
-
+                //QuestionHelper.INSTANCE.toApi(cr);
+                toApi(cr);
 
 
                 break;
             case "multiple_choice":
                 cr.setChoice(jsonArrayChoices);
                 cr.setCorrectAnswerid(jsonArrayCorrectChoices);
-                QuestionHelper.INSTANCE.toApi(cr);
+                //QuestionHelper.INSTANCE.toApi(cr);
+                toApi(cr);
                 break;
             case "one_word":
                 try {
@@ -138,7 +146,8 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                     jsonArrayOneword.put(jsonOneword);
                     cr.setChoice(jsonArrayOneword);
                 } catch (JSONException e) {e.printStackTrace();}
-                QuestionHelper.INSTANCE.toApi(cr);
+                //QuestionHelper.INSTANCE.toApi(cr);
+                toApi(cr);
                 break;
         }
 
@@ -306,5 +315,32 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
             answers.addView(temp);
 
         }
+    }
+
+
+    void toApi(QuestionHelper.currentQuestion currentQuestion) {
+
+        FormBody.Builder toAPi = new FormBody.Builder();
+        toAPi.add("subject_name", QuestionHelper.INSTANCE.getSubject_name());
+        toAPi.add("level_id", QuestionHelper.INSTANCE.getLevel_id());
+        toAPi.add("question",currentQuestion.getQuestion());
+        toAPi.add("question_type",currentQuestion.getQuestion_type());
+        toAPi.add("choices", String.valueOf(currentQuestion.getChoice()));
+        toAPi.add("correct_answers", String.valueOf(currentQuestion.getCorrectAnswerid()));
+        System.out.println("subject_name "+QuestionHelper.INSTANCE.getSubject_name());
+        System.out.println("level_id "+QuestionHelper.INSTANCE.getLevel_id());
+        System.out.println("question "+currentQuestion.getQuestion());
+        System.out.println("question_type "+currentQuestion.getQuestion_type());
+        System.out.println("choices "+String.valueOf(currentQuestion.getChoice()));
+        System.out.println("correct_answers "+String.valueOf(currentQuestion.getCorrectAnswerid()));
+
+        OkhttpObservable.INSTANCE
+                .post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/addQuestion",toAPi)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError (error->error.printStackTrace())
+                .doOnNext (e-> System.out.println("addd question "+e))
+                .subscribe();
+
     }
 }

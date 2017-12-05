@@ -1,5 +1,6 @@
 package com.questionqate.Pojo
 
+import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import org.json.JSONObject
 

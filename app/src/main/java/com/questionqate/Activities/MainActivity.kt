@@ -13,8 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.JsonParser
+import com.questionqate.LecturerActivities.LecturerHome
 import com.questionqate.Pojo.Global_Strings
-import com.questionqate.Pojo.QuestionHelper
 import com.questionqate.Pojo.Teacher
 import com.questionqate.R
 import com.questionqate.Utilties.LoadingDialog
@@ -22,8 +22,6 @@ import css.fingerprint.Networking.OkhttpObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.FormBody
-import org.json.JSONArray
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 

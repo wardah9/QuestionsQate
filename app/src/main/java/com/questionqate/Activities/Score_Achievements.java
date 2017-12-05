@@ -11,6 +11,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.questionqate.Adapters.Score_AchievementsAdapter;
 import com.questionqate.AdditionalViews.LoadingButton;
 import com.questionqate.Dialog.LoadingDialog;
@@ -18,6 +19,7 @@ import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Score_Achievements extends AppCompatActivity {
 
@@ -40,6 +42,7 @@ public class Score_Achievements extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
+//
         ndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getAchievements")
                 .addBodyParameter("student_id", Global_Strings.INSTANCE.getStudent_UID_firebase())
                 .setPriority(Priority.MEDIUM)

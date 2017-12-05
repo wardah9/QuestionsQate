@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#edf0f4"
-    tools:context=".CreateQuestion.CreateQuestionActivity">
+    tools:context=".LecturerActivities.CreateQuestionActivity">
 
     <ScrollView
         android:layout_width="match_parent"

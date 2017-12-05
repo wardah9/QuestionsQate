@@ -19,5 +19,9 @@
         android:icon="@drawable/ic_menu_share"
         support:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         android:title="Share" />
+    <item
+        android:id="@+id/nav_exit"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:title="Exit" />
 
 </menu>

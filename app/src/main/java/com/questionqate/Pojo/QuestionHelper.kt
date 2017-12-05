@@ -23,43 +23,43 @@ object QuestionHelper {
     var level_id: String = ""
 
     data class currentQuestion(var question: String,
-                               var question_type: String, var choice: JSONArray, var correctAnswerid: JSONArray)
+                               var question_type: String,
+                               var choice: JSONArray,
+                               var correctAnswerid: JSONArray)
 
-
-
-    fun addChoice(id:Int, choice:String) : JSONObject{
-        var choice= JSONObject()
-        choice.put("choice",choice)
-        choice.put("id",id)
+    fun addChoice(id: Int, choice: String): JSONObject {
+        var choice = JSONObject()
+        choice.put("choice", choice)
+        choice.put("id", id)
         return choice
     }
 
-    fun addChoice(id:Int, choice:Int) : JSONObject{
-        var choice= JSONObject()
-        choice.put("choice",choice)
-        choice.put("id",id)
+    fun addChoice(id: Int, choice: Int): JSONObject {
+        var choice = JSONObject()
+        choice.put("choice", choice)
+        choice.put("id", id)
         return choice
     }
 
 
     fun toApi(currentQuestion: currentQuestion) {
 
-        val toAPi =FormBody.Builder()
+        val toAPi = FormBody.Builder()
         toAPi.add("subject_name", subject_name)
         toAPi.add("level_id", level_id)
-        toAPi.add("question",currentQuestion.question)
-        toAPi.add("question_type",currentQuestion.question_type)
-        toAPi.add("choices",currentQuestion.choice.toString())
-        toAPi.add("correct_answers",currentQuestion.correctAnswerid.toString())
-        System.out.println(" current question "+toAPi.toString())
+        toAPi.add("question", currentQuestion.question)
+        toAPi.add("question_type", currentQuestion.question_type)
+        toAPi.add("choices", currentQuestion.choice.toString())
+        toAPi.add("correct_answers", currentQuestion.correctAnswerid.toString())
+        System.out.println(" current question " + toAPi.toString())
 
         AndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/addQuestion")
                 .addBodyParameter("subject_name", subject_name)
                 .addBodyParameter("level_id", level_id)
-                .addBodyParameter("question",currentQuestion.question)
-                .addBodyParameter("question_type",currentQuestion.question_type)
-                .addBodyParameter("choices",currentQuestion.choice.toString())
-                .addBodyParameter("correct_answers",currentQuestion.correctAnswerid.toString())
+                .addBodyParameter("question", currentQuestion.question)
+                .addBodyParameter("question_type", currentQuestion.question_type)
+                .addBodyParameter("choices", currentQuestion.choice.toString())
+                .addBodyParameter("correct_answers", currentQuestion.correctAnswerid.toString())
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener {
@@ -81,10 +81,9 @@ object QuestionHelper {
 
     }
 
-    fun sendQuestionToAPI(){
+    fun sendQuestionToAPI() {
 
     }
-
 
 
 }

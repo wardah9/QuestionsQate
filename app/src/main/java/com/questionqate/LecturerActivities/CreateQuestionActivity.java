@@ -338,6 +338,12 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
 
         dialog = new LoadingDialog(this, "adding Question...");
         dialog.setCancelable(false);
+        dialog.doAction("OK", view -> {
+            dialog.dismiss();
+            startActivity(new Intent(CreateQuestionActivity.this,LecturerHome.class));
+            finish();
+        });
+
         dialog.show();
         FormBody.Builder toAPi = new FormBody.Builder();
         toAPi.add("subject_name", QuestionHelper.INSTANCE.getSubject_name());
@@ -358,10 +364,10 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(error -> error.printStackTrace())
+                .doOnNext(e-> dialog.hideProgress())
                 .doOnNext(e-> dialog.setResultText("Question added successfully :)"))
                 .doOnNext(e -> System.out.println("addd question " + e))
-                .doOnNext(e -> dialog.dismiss())
-                .doOnNext(e-> startActivity(new Intent(this,LecturerHome.class)))
+                .doOnNext(e-> dialog.showActionButton())
                 .subscribe();
 
     }

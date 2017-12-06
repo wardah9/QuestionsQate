@@ -30,6 +30,10 @@ class LoadingDialog(context: Activity,loadingtext: String) : Dialog(context) , E
     }
 
     fun doAction(action: View.OnClickListener) {
+        loading_dialog_action_btn.setOnClickListener(action)
+    }
+    fun doAction(actionText: String,action: View.OnClickListener) {
+        loading_dialog_action_btn.text = actionText
 
         loading_dialog_action_btn.setOnClickListener(action)
     }
@@ -48,4 +52,9 @@ class LoadingDialog(context: Activity,loadingtext: String) : Dialog(context) , E
 //    fun ProgressBar(): ProgressBar? {
 //        return loading_progress_bar
 //    }
+
+    fun showActionButton(){
+        loading_dialog_action_btn.visibility = View.VISIBLE
+    }
+
 }

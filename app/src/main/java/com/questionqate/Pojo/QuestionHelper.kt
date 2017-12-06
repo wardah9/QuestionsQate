@@ -20,7 +20,7 @@ import org.json.JSONObject
 object QuestionHelper {
 
     var subject_name: String = ""
-    var level_id: String = ""
+    var level_id: Int = 0
 
     data class currentQuestion(var question: String,
                                var question_type: String,
@@ -46,7 +46,7 @@ object QuestionHelper {
 
         val toAPi = FormBody.Builder()
         toAPi.add("subject_name", subject_name)
-        toAPi.add("level_id", level_id)
+        toAPi.add("level_id", level_id.toString())
         toAPi.add("question", currentQuestion.question)
         toAPi.add("question_type", currentQuestion.question_type)
         toAPi.add("choices", currentQuestion.choice.toString())
@@ -55,7 +55,7 @@ object QuestionHelper {
 
         AndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/addQuestion")
                 .addBodyParameter("subject_name", subject_name)
-                .addBodyParameter("level_id", level_id)
+                .addBodyParameter("level_id", level_id.toString())
                 .addBodyParameter("question", currentQuestion.question)
                 .addBodyParameter("question_type", currentQuestion.question_type)
                 .addBodyParameter("choices", currentQuestion.choice.toString())

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.questionqate.Activities.LevelsActivity;
 import com.questionqate.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by anarose on 11/14/17.
@@ -44,6 +45,9 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     @Override
     public void onBindViewHolder(SubjectList_holder holder, final int position) {
 
+//        holder.subject_name_view.setText(subjects.get(position).asJsonObject.get("name").asString)
+//        Picasso.with(context1).load(subjects.get(position).asJsonObject.get("imageURL").asString)
+//                .into(holder.subject_image_view);
 
         holder.subjet_card.setOnClickListener(v -> {
             if (position == 0){

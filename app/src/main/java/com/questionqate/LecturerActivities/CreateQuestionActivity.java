@@ -1,5 +1,6 @@
 package com.questionqate.LecturerActivities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,10 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.questionqate.Adapters.TeacherSubjectListAdapter;
+import com.questionqate.Dialog.LoadingDialog;
+import com.questionqate.Interface.Exceptions;
 import com.questionqate.Pojo.QuestionHelper;
 import com.questionqate.Pojo.Teacher;
 import com.questionqate.R;
+import com.questionqate.Utilties.EventBus;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.FormBody;
 
-public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateQuestionActivity extends AppCompatActivity implements View.OnClickListener, Exceptions {
 
     EditText question_edt, shortAnswer, noOfAnswers;
     LinearLayout answer_content, what, answers;
@@ -43,13 +48,17 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
     LinearLayout subjectlist, levelslist, questionstypelist;
     RadioGroup true_false;
 
+    LoadingDialog dialog;
+
     QuestionHelper.currentQuestion cr = new QuestionHelper.currentQuestion("", "", new JSONArray(), new JSONArray());
     JSONArray jsonArrayChoices = new JSONArray();
     JSONArray jsonArrayCorrectChoices = new JSONArray();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
+        EventBus.INSTANCE.addExceptionsListener(this);
 
         recyclerView = findViewById(R.id.create_question_subjects_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -87,15 +96,17 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
         add_answers_list.setOnClickListener(this);
         true_false.setOnCheckedChangeListener((radioGroup, i) -> {
 
-            switch(radioGroup.getCheckedRadioButtonId()){
+            switch (radioGroup.getCheckedRadioButtonId()) {
                 case R.id.two:
                     try {
-                        cr.setCorrectAnswerid(new JSONArray().put(new JSONObject().put("iscorrect",1)));
-                    } catch (JSONException e) {e.printStackTrace();}
+                        cr.setCorrectAnswerid(new JSONArray().put(new JSONObject().put("iscorrect", 1)));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case R.id.one:
                     try {
-                        cr.setCorrectAnswerid(new JSONArray().put(new JSONObject().put("iscorrect",0)));
+                        cr.setCorrectAnswerid(new JSONArray().put(new JSONObject().put("iscorrect", 0)));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -139,13 +150,16 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 break;
             case "one_word":
                 try {
-                    JSONArray jsonArrayOneword =new JSONArray();
-                    JSONObject jsonOneword =new JSONObject();
+                    JSONArray jsonArrayOneword = new JSONArray();
+                    JSONObject jsonOneword = new JSONObject();
                     jsonOneword.put("choice", shortAnswer.getText().toString());
                     jsonOneword.put("id", 0);
                     jsonArrayOneword.put(jsonOneword);
                     cr.setChoice(jsonArrayOneword);
-                } catch (JSONException e) {e.printStackTrace();}
+                    cr.setCorrectAnswerid(new JSONArray().put(new JSONObject().put("iscorrect", shortAnswer.getText().toString())));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //QuestionHelper.INSTANCE.toApi(cr);
                 toApi(cr);
                 break;
@@ -201,7 +215,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 low.setBackgroundResource(R.drawable.corner);
                 high.setBackgroundResource(R.drawable.corner);
                 subjectlist.setVisibility(View.GONE);
-                QuestionHelper.INSTANCE.setLevel_id("medium");
+                QuestionHelper.INSTANCE.setLevel_id(2);
                 break;
 
             case R.id.low:
@@ -209,14 +223,14 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 low.setBackgroundResource(R.drawable.btn_clicked);
                 high.setBackgroundResource(R.drawable.corner);
                 subjectlist.setVisibility(View.GONE);
-                QuestionHelper.INSTANCE.setLevel_id("low");
+                QuestionHelper.INSTANCE.setLevel_id(1);
                 break;
             case R.id.high:
                 medium.setBackgroundResource(R.drawable.corner);
                 low.setBackgroundResource(R.drawable.corner);
                 high.setBackgroundResource(R.drawable.btn_clicked);
                 subjectlist.setVisibility(View.GONE);
-                QuestionHelper.INSTANCE.setLevel_id("high");
+                QuestionHelper.INSTANCE.setLevel_id(3);
                 break;
             case R.id.add_answers_list:
                 addAnswersList();
@@ -268,9 +282,11 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
 
             int finalI = i;
             try {
-                jsonArrayChoices.put(finalI,new JSONObject().put("choice","").put("id", finalI));
-                jsonArrayCorrectChoices.put(finalI,new JSONObject().put("iscorrect",false));
-            } catch (JSONException e) {e.printStackTrace();}
+                jsonArrayChoices.put(finalI, new JSONObject().put("choice", "").put("id", finalI));
+                jsonArrayCorrectChoices.put(finalI, new JSONObject().put("iscorrect", false));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -286,7 +302,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 @Override
                 public void afterTextChanged(Editable editable) {
                     try {
-                        jsonArrayChoices.put(finalI,new JSONObject().put("choice",editable.toString()).put("id", finalI));
+                        jsonArrayChoices.put(finalI, new JSONObject().put("choice", editable.toString()).put("id", finalI));
                     } catch (JSONException e) {
 
 
@@ -303,7 +319,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     try {
-                        jsonArrayCorrectChoices.put(finalI,new JSONObject().put("iscorrect",finalI));
+                        jsonArrayCorrectChoices.put(finalI, new JSONObject().put("iscorrect", finalI));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -320,27 +336,48 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
 
     void toApi(QuestionHelper.currentQuestion currentQuestion) {
 
+        dialog = new LoadingDialog(this, "adding Question...");
+        dialog.setCancelable(false);
+        dialog.doAction("OK", view -> {
+            dialog.dismiss();
+            startActivity(new Intent(CreateQuestionActivity.this,LecturerHome.class));
+            finish();
+        });
+
+        dialog.show();
         FormBody.Builder toAPi = new FormBody.Builder();
         toAPi.add("subject_name", QuestionHelper.INSTANCE.getSubject_name());
-        toAPi.add("level_id", QuestionHelper.INSTANCE.getLevel_id());
-        toAPi.add("question",currentQuestion.getQuestion());
-        toAPi.add("question_type",currentQuestion.getQuestion_type());
+        toAPi.add("level_id", String.valueOf(QuestionHelper.INSTANCE.getLevel_id()));
+        toAPi.add("question", currentQuestion.getQuestion());
+        toAPi.add("question_type", currentQuestion.getQuestion_type());
         toAPi.add("choices", String.valueOf(currentQuestion.getChoice()));
         toAPi.add("correct_answers", String.valueOf(currentQuestion.getCorrectAnswerid()));
-        System.out.println("subject_name "+QuestionHelper.INSTANCE.getSubject_name());
-        System.out.println("level_id "+QuestionHelper.INSTANCE.getLevel_id());
-        System.out.println("question "+currentQuestion.getQuestion());
-        System.out.println("question_type "+currentQuestion.getQuestion_type());
-        System.out.println("choices "+String.valueOf(currentQuestion.getChoice()));
-        System.out.println("correct_answers "+String.valueOf(currentQuestion.getCorrectAnswerid()));
+        System.out.println("subject_name " + QuestionHelper.INSTANCE.getSubject_name());
+        System.out.println("level_id " + QuestionHelper.INSTANCE.getLevel_id());
+        System.out.println("question " + currentQuestion.getQuestion());
+        System.out.println("question_type " + currentQuestion.getQuestion_type());
+        System.out.println("choices " + String.valueOf(currentQuestion.getChoice()));
+        System.out.println("correct_answers " + String.valueOf(currentQuestion.getCorrectAnswerid()));
 
         OkhttpObservable.INSTANCE
-                .post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/addQuestion",toAPi)
+                .post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/addQuestion", toAPi)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError (error->error.printStackTrace())
-                .doOnNext (e-> System.out.println("addd question "+e))
+                .doOnError(error -> error.printStackTrace())
+                .doOnNext(e-> dialog.hideProgress())
+                .doOnNext(e-> dialog.setResultText("Question added successfully :)"))
+                .doOnNext(e -> System.out.println("addd question " + e))
+                .doOnNext(e-> dialog.showActionButton())
                 .subscribe();
+
+    }
+
+    @Override
+    public void onNetworkException(@NotNull String e) {
+
+        if (dialog.isShowing()){
+            dialog.dismiss();
+        }
 
     }
 }

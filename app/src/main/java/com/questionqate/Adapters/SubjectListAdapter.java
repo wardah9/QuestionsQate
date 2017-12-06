@@ -38,7 +38,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
     @Override
     public SubjectList_holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subjects_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subject_list_stu, parent, false);
         return new SubjectList_holder(v);
     }
 
@@ -54,10 +54,10 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
                 Intent intent=  new Intent(context1, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                 context1.startActivity(intent);
                 context1.finish();
             }
+
 
         });
     }

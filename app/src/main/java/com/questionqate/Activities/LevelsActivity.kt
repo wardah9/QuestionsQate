@@ -57,7 +57,7 @@ class LevelsActivity : AppCompatActivity() {
                             Observable.fromArray(response!!.getJSONObject("JAVA").getJSONArray("levels"))
                                     .map<JSONObject> { e ->
                                         e.getJSONObject(i)
-                                    } //TODO add dynamic 1,2,3 for level
+                                    }
                                     .doOnNext { e ->
                                         QuestionList.getInstance().getQuestionList()
                                                 .add(Question(e.getJSONArray("Questions"),

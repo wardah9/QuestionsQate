@@ -29,6 +29,7 @@ import org.json.JSONObject
 import android.preference.PreferenceManager
 import android.content.SharedPreferences
 import android.opengl.Visibility
+import com.androidnetworking.interfaces.JSONObjectRequestListener
 
 
 class LevelsActivity : AppCompatActivity() {
@@ -48,35 +49,62 @@ class LevelsActivity : AppCompatActivity() {
         AndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsJSONArray(object : JSONArrayRequestListener {
-
-                    override fun onResponse(response: JSONArray) {
-                        //  Log.d("questionArray",response.toString());
-                        System.out.print(response.length())
-                        for (i in 1..response.length()+1) {
-//        .map(e->e.getJSONArray("Questions"))
-                            //                                    .doOnNext(e->e.remove(0))
-                            Observable.fromArray(response)
+                .getAsJSONObject(object: JSONObjectRequestListener{
+                    override fun onResponse(response: JSONObject?) {
+                        System.out.println(response!!.getJSONObject("JAVA").getJSONArray("levels"))
+                        System.out.println("levels array"+response!!.getJSONObject("JAVA").getJSONArray("levels").length())
+                        for (i in 1 until response.getJSONObject("JAVA").getJSONArray("levels").length()-1) {
+                            Observable.fromArray(response!!.getJSONObject("JAVA").getJSONArray("levels"))
                                     .map<JSONObject> { e ->
-                                        e.getJSONObject(1).getJSONArray("levels")
-                                                .getJSONObject(i)
+                                        e.getJSONObject(i)
                                     } //TODO add dynamic 1,2,3 for level
                                     .doOnNext { e ->
                                         QuestionList.getInstance().getQuestionList()
                                                 .add(Question(e.getJSONArray("Questions"),
                                                         e.getInt("StrikeTime")))
                                     }
-                                    .doOnNext { e -> println(" here  "+Arrays.toString(QuestionList.getInstance().getQuestionList().toTypedArray())) }
+                                    .doOnNext { e -> println(" here  " + Arrays.toString(QuestionList.getInstance().getQuestionList().toTypedArray())) }
                                     .subscribe()
-
-                            dialog.dismiss()
                         }
+                        dialog.dismiss()
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
-                    override fun onError(anError: ANError) {
-
+                    override fun onError(anError: ANError?) {
+                   //     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
+
                 })
+
+//                .getAsJSONArray(object : JSONArrayRequestListener {
+//
+//                    override fun onResponse(response: JSONArray) {
+//                        //  Log.d("questionArray",response.toString());
+//                        System.out.print(response.length())
+//                        for (i in 1..response.length()+1) {
+////        .map(e->e.getJSONArray("Questions"))
+//                            //                                    .doOnNext(e->e.remove(0))
+//                            Observable.fromArray(response)
+//                                    .map<JSONObject> { e ->
+//                                        e.getJSONObject(0).getJSONArray("levels")
+//                                                .getJSONObject(i)
+//                                    } //TODO add dynamic 1,2,3 for level
+//                                    .doOnNext { e ->
+//                                        QuestionList.getInstance().getQuestionList()
+//                                                .add(Question(e.getJSONArray("Questions"),
+//                                                        e.getInt("StrikeTime")))
+//                                    }
+//                                    .doOnNext { e -> println(" here  "+Arrays.toString(QuestionList.getInstance().getQuestionList().toTypedArray())) }
+//                                    .subscribe()
+//
+//                            dialog.dismiss()
+//                        }
+//                    }
+//
+//                    override fun onError(anError: ANError) {
+//
+//                    }
+//                })
 
 
     }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "898521500587-8jpsgc45sitv8uigluengkkisbi9k1e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.questionqate",
+            "certificate_hash": "9ce3be2b94b52603c2cfc9b639e2b8d61c433399"
+          }
+        },
+        {
           "client_id": "898521500587-t7p9g15diqk8j3fabqmb3ke1qelvuqki.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

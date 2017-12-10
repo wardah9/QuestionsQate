@@ -53,7 +53,7 @@ class LevelsActivity : AppCompatActivity() {
                     override fun onResponse(response: JSONObject?) {
                         System.out.println(response!!.getJSONObject("JAVA").getJSONArray("levels"))
                         System.out.println("levels array"+response!!.getJSONObject("JAVA").getJSONArray("levels").length())
-                        for (i in 1 until response.getJSONObject("JAVA").getJSONArray("levels").length()-1) {
+                        for (i in 1 until response.getJSONObject("JAVA").getJSONArray("levels").length()) {
                             Observable.fromArray(response!!.getJSONObject("JAVA").getJSONArray("levels"))
                                     .map<JSONObject> { e ->
                                         e.getJSONObject(i)

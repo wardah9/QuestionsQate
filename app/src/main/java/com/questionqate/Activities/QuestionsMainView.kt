@@ -83,7 +83,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         user_counter_textview.text = textCounter2
 
 
-
+System.out.println(QuestionList.getInstance().getQuestionList())
         mRecyclerView!!.adapter = QuestionAdapter(QuestionList.getInstance().getQuestionList()[level])
         chrono_counter.start()
         startLevelCountDown(currentCOunter)
@@ -264,6 +264,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     }
 
     fun goTolevels(){
+
        var intent =Intent(this@QuestionsMainView,LevelsActivity::class.java)
         intent.putExtra("finished_level",level)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK

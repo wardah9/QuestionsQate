@@ -10,8 +10,7 @@
         android:layout_width="110dp"
         android:layout_height="130dp"
         android:layout_marginRight="4dp"
-        android:background="#00112233"
-   >
+        android:background="#00112233">
 
         <RelativeLayout
             android:id="@+id/card_subject_border"

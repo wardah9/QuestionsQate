@@ -23,6 +23,9 @@ import com.questionqate.Activities.LevelsActivity;
 import com.questionqate.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by anarose on 11/14/17.
  */
@@ -30,15 +33,17 @@ import com.squareup.picasso.Picasso;
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.SubjectList_holder> {
 
     Activity context1;
+    JSONObject subjectsTbl;
 
-    public SubjectListAdapter(Activity context) {
+    public SubjectListAdapter(Activity context, JSONObject subjects) {
 
         this.context1 = context;
+        this.subjectsTbl = subjects;
     }
 
     @Override
     public SubjectList_holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subjects_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subject_list_stu, parent, false);
         return new SubjectList_holder(v);
     }
 
@@ -49,22 +54,32 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 //        Picasso.with(context1).load(subjects.get(position).asJsonObject.get("imageURL").asString)
 //                .into(holder.subject_image_view);
 
+        try {
+//            System.out.println((String) subjectsTbl.names().get(position));
+            holder.subject_name_view.setText((String) subjectsTbl.names().get(position));
+//            System.out.println(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"));
+            Picasso.with(context1).load(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"))
+                .into(holder.subject_image_view);
+
+        } catch (JSONException e) {e.printStackTrace();}
+
+
         holder.subjet_card.setOnClickListener(v -> {
             if (position == 0){
 
                 Intent intent=  new Intent(context1, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                 context1.startActivity(intent);
                 context1.finish();
             }
+
 
         });
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return subjectsTbl.length();
     }
 
     public class SubjectList_holder extends RecyclerView.ViewHolder {

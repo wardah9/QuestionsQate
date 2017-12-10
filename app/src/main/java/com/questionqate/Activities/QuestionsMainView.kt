@@ -189,6 +189,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
     override fun onLevelComplete() {
         runOnUiThread {
 
+            chrono_counter.stop()
             if(strike_counter>=3){
                 val completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
                 completeDialog.setCancelable(false)

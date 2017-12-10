@@ -1,45 +1,39 @@
 package com.questionqate.Activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.questionqate.Adapters.SubjectListAdapter;
-import com.questionqate.Pojo.Student;
+import com.questionqate.Dialog.LoadingDialog;
 import com.questionqate.R;
 import com.questionqate.StudentProfile.Profile;
+
+import org.json.JSONObject;
 
 
 public class StudentSlideMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SubjectListAdapter subjecAdapter;
-    TextView nav_name;
-    TextView nav_email;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -51,44 +45,35 @@ public class StudentSlideMenu extends AppCompatActivity
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
-
-        FirebaseDatabase udatabase = FirebaseDatabase.getInstance();
-        DatabaseReference umyRef = udatabase.getReference("My_students");
-
-        subjecAdapter = new SubjectListAdapter(StudentSlideMenu.this);
         RecyclerView subjects_list = findViewById(R.id.subjects_list);
-
-        nav_name = findViewById(R.id.nav_name);
-        nav_email = findViewById(R.id.nav_email);
-
-//        umyRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                .addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
-//
-//                            Log.v("firbase", "key is : " + postSnapShot.getKey()
-//                                    + " value  is " + postSnapShot.getValue());
-//
-//                            Student firebaseStudentDetails = dataSnapshot.getValue(Student.class);
-//
-//                            assert firebaseStudentDetails != null;
-//                            nav_name.setText(firebaseStudentDetails.getUserName());
-//                            nav_email.setText(firebaseStudentDetails.getUserEmail());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        // Failed to read value
-//                        Log.w("firebase", "Failed to read data.", databaseError.toException());
-//                    }
-//                });
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         subjects_list.setLayoutManager(mLayoutManager);
+
         subjects_list.setItemAnimator(new DefaultItemAnimator());
-        subjects_list.setAdapter(subjecAdapter);
+
+        LoadingDialog dialog = new LoadingDialog(this, "Loading.. please wait!");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        AndroidNetworking.post(" https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        subjecAdapter = new SubjectListAdapter(StudentSlideMenu.this, response);
+                        subjects_list.setAdapter(subjecAdapter);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(StudentSlideMenu.this, "cannot get subjects", Toast.LENGTH_SHORT).show();
+                        System.out.println("getSubjectError: "+ anError.getErrorBody());
+                    }
+                });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -126,13 +111,15 @@ public class StudentSlideMenu extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
+            setShareIntent();
+
         } else if (id == R.id.nav_exit) {
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
 
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

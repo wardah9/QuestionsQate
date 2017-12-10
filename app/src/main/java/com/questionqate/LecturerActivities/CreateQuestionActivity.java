@@ -180,8 +180,8 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 what.setVisibility(View.GONE);
                 shortAnswer.setVisibility(View.GONE);
                 answers.setVisibility(View.GONE);
-                subjectlist.setVisibility(View.GONE);
-                levelslist.setVisibility(View.GONE);
+//                subjectlist.setVisibility(View.GONE);
+//                levelslist.setVisibility(View.GONE);
                 cr.setQuestion_type("true_false");
 
                 break;
@@ -192,8 +192,8 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 what.setVisibility(View.VISIBLE);
                 shortAnswer.setVisibility(View.GONE);
                 answers.setVisibility(View.GONE);
-                subjectlist.setVisibility(View.GONE);
-                levelslist.setVisibility(View.GONE);
+//                subjectlist.setVisibility(View.GONE);
+//                levelslist.setVisibility(View.GONE);
                 cr.setQuestion_type("multiple_choice");
 
                 break;
@@ -204,8 +204,8 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
                 what.setVisibility(View.GONE);
                 shortAnswer.setVisibility(View.VISIBLE);
                 answers.setVisibility(View.GONE);
-                subjectlist.setVisibility(View.GONE);
-                levelslist.setVisibility(View.GONE);
+//                subjectlist.setVisibility(View.GONE);
+//                levelslist.setVisibility(View.GONE);
                 cr.setQuestion_type("one_word");
 
                 break;
@@ -235,7 +235,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
             case R.id.add_answers_list:
                 addAnswersList();
                 answers.setVisibility(View.VISIBLE);
-                questionstypelist.setVisibility(View.GONE);
+//                questionstypelist.setVisibility(View.GONE);
                 break;
         }
     }

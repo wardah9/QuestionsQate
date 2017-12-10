@@ -23,6 +23,9 @@ import com.questionqate.Activities.LevelsActivity;
 import com.questionqate.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by anarose on 11/14/17.
  */
@@ -30,10 +33,12 @@ import com.squareup.picasso.Picasso;
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.SubjectList_holder> {
 
     Activity context1;
+    JSONObject subjectsTbl;
 
-    public SubjectListAdapter(Activity context) {
+    public SubjectListAdapter(Activity context, JSONObject subjects) {
 
         this.context1 = context;
+        this.subjectsTbl = subjects;
     }
 
     @Override
@@ -48,6 +53,16 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 //        holder.subject_name_view.setText(subjects.get(position).asJsonObject.get("name").asString)
 //        Picasso.with(context1).load(subjects.get(position).asJsonObject.get("imageURL").asString)
 //                .into(holder.subject_image_view);
+
+        try {
+//            System.out.println((String) subjectsTbl.names().get(position));
+            holder.subject_name_view.setText((String) subjectsTbl.names().get(position));
+//            System.out.println(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"));
+            Picasso.with(context1).load(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"))
+                .into(holder.subject_image_view);
+
+        } catch (JSONException e) {e.printStackTrace();}
+
 
         holder.subjet_card.setOnClickListener(v -> {
             if (position == 0){
@@ -64,7 +79,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
     @Override
     public int getItemCount() {
-        return 1;
+        return subjectsTbl.length();
     }
 
     public class SubjectList_holder extends RecyclerView.ViewHolder {

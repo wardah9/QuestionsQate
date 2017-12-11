@@ -42,13 +42,10 @@ class LevelsActivity : AppCompatActivity() {
 
 
         global = Global_Strings
-        val subjectName:String = intent.getStringExtra("SubjectName")
-
-        println(subjectName)
+        val subjectName:String = Global_Strings.subjectName
 
         val dialog = LoadingDialog().init(this, "Loading please wait")
         dialog.show()
-
         AndroidNetworking.post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/getSubjects")
                 .setPriority(Priority.MEDIUM)
                 .build()

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.questionqate.Activities.LevelsActivity;
+import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.R;
 import com.squareup.picasso.Picasso;
 
@@ -63,11 +64,14 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
                 Intent intent = new Intent(context1, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("SubjectName", (String) subjectsTbl.names().get(position));
+                Global_Strings.INSTANCE.setSubjectName((String) subjectsTbl.names().get(position));
+                System.out.println((String) subjectsTbl.names().get(position));
                 context1.startActivity(intent);
                 context1.finish();
 
-            } catch (JSONException e) {e.printStackTrace();}
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         });
     }
 

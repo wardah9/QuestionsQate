@@ -315,16 +315,13 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
             CheckBox checkbox = new CheckBox(this);
             checkbox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
-            checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    try {
-                        jsonArrayCorrectChoices.put(finalI, new JSONObject().put("iscorrect", finalI));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
+            checkbox.setOnCheckedChangeListener((compoundButton, b) -> {
+                try {
+                    jsonArrayCorrectChoices.put(finalI, new JSONObject().put("iscorrect", finalI));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
             });
             temp.addView(checkbox);
 

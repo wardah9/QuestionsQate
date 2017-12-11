@@ -9,4 +9,5 @@ object Global_Strings {
     // getters and setters are already built in
     var level_status: String = ""
     var student_UID_firebase: String = ""
+    var subjectName: String = ""
 }

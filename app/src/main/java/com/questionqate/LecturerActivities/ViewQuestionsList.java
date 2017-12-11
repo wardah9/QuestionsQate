@@ -39,9 +39,6 @@ public class ViewQuestionsList extends AppCompatActivity implements LecturerChoi
         EventBus.INSTANCE.addLecturerListner(this);
         setContentView(R.layout.activity_view_questions_list);
 
-
-
-
         LoadingDialog dialog = new LoadingDialog(this, "Loading... wait!");
         dialog.setCancelable(false);
         dialog.show();

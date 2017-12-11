@@ -61,55 +61,59 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
 
             if (questions.questionStatus(position) == Question.questionStatus.ACTIVE || questions.questionStatus(position)==null) {
                 //  holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_inactive, android.R.color.darker_gray));
-                var choices = questions.questions.getJSONObject(position).getJSONArray("choices")
+
                 var type = questions.questions.getJSONObject(position).getString("type")
-                var questoin_id = questions.questions.getJSONObject(position).getString("id")
+
+                if (questions.questions.getJSONObject(position).has("choices")) {
 
 
-                holder.question_parent_layout.visibility = View.VISIBLE
-                holder.question_text.text = questions.questions.getJSONObject(position).getString("question")
-                questionType(holder, type, choices, questoin_id)
-
-                var barChartModel = BarChartModel()
-                barChartModel.setBarValue(10)
-                barChartModel.setBarColor(Color.parseColor("#9C27B0"))
-                barChartModel.setBarTag(null); //You can set your own tag to bar model
-                barChartModel.setBarText("10");
-                holder.barChart.addBar(barChartModel);
+                    var choices = questions.questions.getJSONObject(position).getJSONArray("choices")
+                    var questoin_id = questions.questions.getJSONObject(position).getString("id")
 
 
+                    holder.question_parent_layout.visibility = View.VISIBLE
+                    holder.question_text.text = questions.questions.getJSONObject(position).getString("question")
+                    questionType(holder, type, choices, questoin_id)
 
-                var counter=  10
+                    var barChartModel = BarChartModel()
+                    barChartModel.setBarValue(10)
+                    barChartModel.setBarColor(Color.parseColor("#9C27B0"))
+                    barChartModel.setBarTag(null); //You can set your own tag to bar model
+                    barChartModel.setBarText("10");
+                    holder.barChart.addBar(barChartModel);
 
-                holder.question_chronometer.setOnChronometerTickListener {
-                    if(counter>0){
-                        barChartModel.setBarValue(counter)
-                        barChartModel.setBarText(counter.toString());
-                        holder.barChart.updateBar(0,barChartModel);
 
-                    }else if (counter==0){
-                        barChartModel.setBarValue(0)
-                        barChartModel.setBarText(counter.toString());
-                        holder.barChart.updateBar(0,barChartModel)
-                        holder.question_chronometer.stop()
-                        onNextQuestion(holder, position)
-                        System.out.print("stopped timer")
+                    var counter = 10
+
+                    holder.question_chronometer.setOnChronometerTickListener {
+                        if (counter > 0) {
+                            barChartModel.setBarValue(counter)
+                            barChartModel.setBarText(counter.toString());
+                            holder.barChart.updateBar(0, barChartModel);
+
+                        } else if (counter == 0) {
+                            barChartModel.setBarValue(0)
+                            barChartModel.setBarText(counter.toString());
+                            holder.barChart.updateBar(0, barChartModel)
+                            holder.question_chronometer.stop()
+                            onNextQuestion(holder, position)
+                            System.out.print("stopped timer")
+                        }
+
+                        counter = counter - 1
                     }
+                    holder.question_chronometer.start()
 
-                    counter=counter-1
+
                 }
-                holder.question_chronometer.start()
+                holder.question_btn_next.setOnClickListener { listener ->
+                    holder.question_chronometer.stop()
+                    onNextQuestion(holder, position)
+                }
 
+                setQuestionStatus(holder, questions.questionStatus(position))
 
             }
-            holder.question_btn_next.setOnClickListener { listener ->
-                holder.question_chronometer.stop()
-                onNextQuestion(holder, position)
-            }
-
-            setQuestionStatus(holder, questions.questionStatus(position))
-
-
         } catch (e: JSONException) {
             e.printStackTrace()
         }

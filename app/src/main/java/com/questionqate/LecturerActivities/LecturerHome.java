@@ -2,8 +2,10 @@ package com.questionqate.LecturerActivities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,7 @@ public class LecturerHome extends AppCompatActivity {
         final Dialog dialog = new Dialog(LecturerHome.this);
         dialog.setContentView(R.layout.custom_diaog_luct);
         dialog.setCancelable(false);
+        dialog.show();
         EditText newSubjectName = dialog.findViewById(R.id.newSubjectName);
         Button send = dialog.findViewById(R.id.send);
         TextView exit = dialog.findViewById(R.id.exit);
@@ -42,6 +45,8 @@ public class LecturerHome extends AppCompatActivity {
 
             if (newSubjectName.getText().length() > 0) {
                 dialog.dismiss();
+                sendEmail();
+
             } else {
                 Toast.makeText(this, "Subject should not be empty !", Toast.LENGTH_SHORT).show();
             }
@@ -53,5 +58,26 @@ public class LecturerHome extends AppCompatActivity {
         });
 
 
+    }
+
+    protected void sendEmail() {
+
+        String[] TO = {"wardah9658@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adding new Subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+
+            Toast.makeText(this, "Finished sending email...", Toast.LENGTH_SHORT).show();
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(LecturerHome.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -110,7 +110,6 @@ public class StudentSlideMenu extends AppCompatActivity
 
 
         } else if (id == R.id.nav_share) {
-
             setShareIntent();
 
         } else if (id == R.id.nav_exit) {

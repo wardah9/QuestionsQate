@@ -28,11 +28,18 @@ class TeacherLevel_viewListAdapter(internal var context: Activity) : RecyclerVie
     override fun onBindViewHolder(holder: Level_List_holder, position: Int) {
 
         status.add(ViewState.Subject_CardView_States(false))
-        holder.subject_image_view.setImageResource(R.mipmap.ic_launcher)
         holder.subject_name_view.visibility = View.GONE
 
         if(!status[position].isPressed){
             holder.border.setBackgroundColor(Color.WHITE)
+        }
+
+        if (position == 0){
+            holder.subject_image_view.setImageResource(R.drawable.low_level_lect)
+        }else if (position == 1){
+            holder.subject_image_view.setImageResource(R.drawable.medium_level_lect)
+        }else if (position ==2){
+            holder.subject_image_view.setImageResource(R.drawable.high_level_lect)
         }
 
         holder.subjet_card.setOnClickListener {

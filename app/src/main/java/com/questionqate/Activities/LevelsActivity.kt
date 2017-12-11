@@ -42,6 +42,9 @@ class LevelsActivity : AppCompatActivity() {
 
 
         global = Global_Strings
+        val subjectName:String = intent.getStringExtra("SubjectName")
+
+        println(subjectName)
 
         val dialog = LoadingDialog().init(this, "Loading please wait")
         dialog.show()
@@ -51,10 +54,10 @@ class LevelsActivity : AppCompatActivity() {
                 .build()
                 .getAsJSONObject(object: JSONObjectRequestListener{
                     override fun onResponse(response: JSONObject?) {
-                        System.out.println(response!!.getJSONObject("JAVA").getJSONArray("levels"))
-                        System.out.println("levels array"+response!!.getJSONObject("JAVA").getJSONArray("levels").length())
-                        for (i in 1 until response.getJSONObject("JAVA").getJSONArray("levels").length()-1) {
-                            Observable.fromArray(response!!.getJSONObject("JAVA").getJSONArray("levels"))
+                        System.out.println(response!!.getJSONObject(subjectName).getJSONArray("levels"))
+                        System.out.println("levels array"+response!!.getJSONObject(subjectName).getJSONArray("levels").length())
+                        for (i in 1 until response.getJSONObject(subjectName).getJSONArray("levels").length()) {
+                            Observable.fromArray(response!!.getJSONObject(subjectName).getJSONArray("levels"))
                                     .map<JSONObject> { e ->
                                         e.getJSONObject(i)
                                     }

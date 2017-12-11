@@ -1,7 +1,7 @@
 package com.questionqate.Adapters
 
 import android.app.Activity
-import android.graphics.Color.WHITE
+import android.graphics.Color
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,48 +10,35 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.google.gson.JsonArray
-import com.questionqate.Pojo.QuestionHelper
-
 import com.questionqate.Pojo.ViewState
-import com.questionqate.Pojo.ViewState.Subject_CardView_States
 import com.questionqate.R
 import com.questionqate.Utilties.EventBus
-import com.squareup.picasso.Picasso
 
 /**
  * Created by anarose on 11/14/17.
  */
 
-class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var context:Activity) : RecyclerView.Adapter<TeacherSubjectListAdapter.SubjectList_holder>() {
-    var status =  arrayListOf<Subject_CardView_States>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectList_holder {
+class TeacherLevel_viewListAdapter(internal var context: Activity) : RecyclerView.Adapter<TeacherLevel_viewListAdapter.Level_List_holder>() {
+    var status =  arrayListOf<ViewState.Subject_CardView_States>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Level_List_holder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_subjects_list, parent, false)
-
-        subjects.forEach {
-            status.add(ViewState.Subject_CardView_States(false))
-        }
-
-        return SubjectList_holder(v)
+        return Level_List_holder(v)
     }
 
-    override fun onBindViewHolder(holder: SubjectList_holder, position: Int) {
+    override fun onBindViewHolder(holder: Level_List_holder, position: Int) {
 
-        holder.subject_name_view.text = subjects.get(position).asJsonObject.get("name").asString
-        Picasso.with(context).load(subjects.get(position).asJsonObject.get("imageURL").asString)
-                .into(holder.subject_image_view)
-
-
+        status.add(ViewState.Subject_CardView_States(false))
+        holder.subject_image_view.setImageResource(R.mipmap.ic_launcher)
+        holder.subject_name_view.visibility = View.GONE
 
         if(!status[position].isPressed){
-            holder.border.setBackgroundColor(WHITE)
+            holder.border.setBackgroundColor(Color.WHITE)
         }
 
         holder.subjet_card.setOnClickListener {
             holder.border.setBackgroundResource(R.drawable.border)
             setStatus(position)
-            QuestionHelper.subject_name = subjects.get(position).asJsonObject.get("name").asString
-            EventBus.notifyLecturerSubjectChange(subjects.get(position).asJsonObject.get("name").asString)
+            EventBus.notifyLecturerlevelChange(position)
             notifyDataSetChanged()
         }
 
@@ -65,10 +52,10 @@ class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var c
     }
 
     override fun getItemCount(): Int {
-        return subjects.size()
+        return 3
     }
 
-    inner class SubjectList_holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class Level_List_holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         internal var subject_image_view: ImageView = itemView.findViewById(R.id.subject_image_view)
         internal var subject_name_view: TextView = itemView.findViewById(R.id.subject_name_view)

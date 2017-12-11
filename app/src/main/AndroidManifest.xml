@@ -57,9 +57,9 @@
             android:name=".StudentProfile.UpdatedMobileAthuntication"
             android:screenOrientation="portrait" />
         <activity android:name=".LecturerActivities.LecturerHome">
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
-
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
@@ -68,7 +68,8 @@
             android:name=".Activities.Score_Achievements"
             android:screenOrientation="portrait" />
         <activity android:name=".LecturerActivities.CreateQuestionActivity" />
-        <activity android:name=".LecturerActivities.ViewEditQuestions"/>
+        <activity android:name=".LecturerActivities.ViewEditQuestions" />
+        <activity android:name=".LecturerActivities.ViewQuestionsList"/>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.questionqate.Utilties
 
 import com.questionqate.Interface.StrikeTimeInterface
 import com.questionqate.Interface.Exceptions
+import com.questionqate.Interface.LecturerChoices
 import java.util.ArrayList
 
 /**
@@ -13,6 +14,7 @@ object EventBus {
 
     internal var ExceptionInterfaceList: MutableList<Exceptions> = ArrayList()
     internal var StrikeTime: MutableList<StrikeTimeInterface> = ArrayList()
+    internal var LecturerInterfaceList: MutableList<LecturerChoices> = ArrayList()
 
 
     fun addExceptionsListener (listener: Exceptions){
@@ -47,5 +49,19 @@ object EventBus {
         }
     }
 
+    fun addLecturerListner (listener: LecturerChoices){
+        LecturerInterfaceList.add(listener)
+    }
 
+    fun removeLecturerListner (listener: LecturerChoices){
+        LecturerInterfaceList.remove(listener)
+    }
+
+    fun notifyLecturerlevelChange(level: Int){
+        LecturerInterfaceList.last().onLecturerLevelChange(level)
+    }
+
+    fun notifyLecturerSubjectChange(subject: String){
+        LecturerInterfaceList.last().onLecturerSubjectChange(subject)
+    }
 }

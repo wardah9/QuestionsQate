@@ -1,16 +1,7 @@
 package com.questionqate.Adapters;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.RemoteInput;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,24 +47,27 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
         try {
 //            System.out.println((String) subjectsTbl.names().get(position));
+
             holder.subject_name_view.setText((String) subjectsTbl.names().get(position));
 //            System.out.println(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"));
             Picasso.with(context1).load(subjectsTbl.getJSONObject((String) subjectsTbl.names().get(position)).getString("image"))
-                .into(holder.subject_image_view);
+                    .into(holder.subject_image_view);
 
-        } catch (JSONException e) {e.printStackTrace();}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         holder.subjet_card.setOnClickListener(v -> {
-            if (position == 0){
+            try {
 
-                Intent intent=  new Intent(context1, LevelsActivity.class);
+                Intent intent = new Intent(context1, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("SubjectName", (String) subjectsTbl.names().get(position));
                 context1.startActivity(intent);
                 context1.finish();
-            }
 
-
+            } catch (JSONException e) {e.printStackTrace();}
         });
     }
 

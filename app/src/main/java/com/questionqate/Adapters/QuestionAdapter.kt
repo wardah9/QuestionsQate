@@ -59,7 +59,7 @@ class QuestionAdapter(internal var questions: Question) : RecyclerView.Adapter<Q
         try {
 
 
-            if (questions.questionStatus(position) == Question.questionStatus.ACTIVE) {
+            if (questions.questionStatus(position) == Question.questionStatus.ACTIVE || questions.questionStatus(position)==null) {
                 //  holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_inactive, android.R.color.darker_gray));
                 var choices = questions.questions.getJSONObject(position).getJSONArray("choices")
                 var type = questions.questions.getJSONObject(position).getString("type")

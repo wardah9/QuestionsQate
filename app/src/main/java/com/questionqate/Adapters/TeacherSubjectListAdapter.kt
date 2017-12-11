@@ -16,6 +16,7 @@ import com.questionqate.Pojo.QuestionHelper
 import com.questionqate.Pojo.ViewState
 import com.questionqate.Pojo.ViewState.Subject_CardView_States
 import com.questionqate.R
+import com.questionqate.Utilties.EventBus
 import com.squareup.picasso.Picasso
 
 /**
@@ -43,7 +44,7 @@ class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var c
         holder.subject_name_view.text = subjects.get(position).asJsonObject.get("name").asString
         Picasso.with(context).load(subjects.get(position).asJsonObject.get("imageURL").asString)
                 .into(holder.subject_image_view)
-
+         
 
         if(!status[position].isPressed){
             holder.border.setBackgroundColor(WHITE)

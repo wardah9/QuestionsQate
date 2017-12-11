@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     run {
 
                         if (e.asJsonObject.get("isTeacher").asBoolean) {
-                            dialog.hide()
+                            dialog.dismiss()
                             if (!e.asJsonObject.get("auth").asBoolean) {
                                 Toast.makeText(this@MainActivity, " Wrong Email or Password", Toast.LENGTH_LONG).show()
                             } else {
@@ -134,12 +134,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                             Toast.makeText(this@MainActivity,
                                                     "Login failed",
                                                     Toast.LENGTH_SHORT).show()
-                                            dialog.hide()
+                                            dialog.dismiss()
                                         } else {
                                             Toast.makeText(this@MainActivity,
                                                     "Login success ",
                                                     Toast.LENGTH_SHORT).show()
-                                            dialog.hide()
+                                            dialog.dismiss()
                                             getUID()
 
                                         }

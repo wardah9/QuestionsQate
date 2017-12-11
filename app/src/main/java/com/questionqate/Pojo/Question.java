@@ -52,7 +52,7 @@ public class Question {
 
     public Question(JSONArray questions,int StrikeTime) {
 
-        questions.remove(0);
+           questions.remove(0);
         for(int i=0;i<questions.length();i++){
             try {
                 if(i==0){

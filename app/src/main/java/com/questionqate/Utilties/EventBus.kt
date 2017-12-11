@@ -3,6 +3,7 @@ package com.questionqate.Utilties
 import com.questionqate.Interface.StrikeTimeInterface
 import com.questionqate.Interface.Exceptions
 import com.questionqate.Interface.LecturerChoices
+import io.reactivex.rxkotlin.toObservable
 import java.util.ArrayList
 
 /**
@@ -17,6 +18,11 @@ object EventBus {
     internal var LecturerInterfaceList: MutableList<LecturerChoices> = ArrayList()
 
 
+    fun removeStrikeTimeListener(listener: StrikeTimeInterface){
+        StrikeTime.remove(listener)
+    }
+
+
     fun addExceptionsListener (listener: Exceptions){
         ExceptionInterfaceList.add(listener)
     }
@@ -27,9 +33,9 @@ object EventBus {
     }
 
     fun notifyStrike(time: Int){
-        for(listener in StrikeTime){
-            listener.onStrike(time)
-        }
+
+       StrikeTime.last().onStrike(time)
+
     }
 
     fun notifyRemoveStrike(){
@@ -43,6 +49,7 @@ object EventBus {
             listener.onLevelComplete()
         }
     }
+
     fun notifyException(message: String) {
         for(listener in ExceptionInterfaceList){
             listener.onNetworkException(message)

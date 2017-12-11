@@ -30,6 +30,7 @@ import android.preference.PreferenceManager
 import android.content.SharedPreferences
 import android.opengl.Visibility
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.questionqate.Pojo.QuestionHelper
 
 
 class LevelsActivity : AppCompatActivity() {
@@ -111,13 +112,16 @@ class LevelsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         val intent = intent
 
         val hideLevel = intent.getIntExtra("finished_level", 3)
+        var shared_key="${QuestionHelper.subject_name}+finished_level_${hideLevel}"
+
         var sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         val editor = sharedPreferences.edit()
-        editor.putBoolean("finished_level_"+hideLevel, true)
+        editor.putBoolean(shared_key, true)
         editor.commit()
 
 
@@ -149,7 +153,7 @@ class LevelsActivity : AppCompatActivity() {
     fun OnLowLevelClicked(view: View) {
         global.level_status = "low"
         var lowlevel_intent= Intent(this, QuestionsMainView::class.java)
-        lowlevel_intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+    //    lowlevel_intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         lowlevel_intent.putExtra("level", 0)
         startActivity(lowlevel_intent)
         finish()
@@ -158,7 +162,7 @@ class LevelsActivity : AppCompatActivity() {
     fun OnMediumLevelClicked(view: View) {
         global.level_status = "medium"
         var intent= Intent(this, QuestionsMainView::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+     //   intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.putExtra("level", 1)
         startActivity(intent)
         finish()
@@ -168,7 +172,7 @@ class LevelsActivity : AppCompatActivity() {
     fun OnHighLevelClicked(view: View) {
         global.level_status = "high"
         var intent= Intent(this, QuestionsMainView::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+     //   intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.putExtra("level", 2)
         startActivity(intent)
         finish()
@@ -177,7 +181,7 @@ class LevelsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         var intent =Intent(this@LevelsActivity,StudentSlideMenu::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+    //    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
 

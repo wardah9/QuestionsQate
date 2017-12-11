@@ -1,6 +1,5 @@
 package com.questionqate.Activities
 
-import android.app.Dialog
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -18,7 +17,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.JsonParser
-import com.jakewharton.rxbinding2.view.RxView
 import com.questionqate.Adapters.QuestionAdapter
 import com.questionqate.Interface.Exceptions
 import com.questionqate.Interface.StrikeTimeInterface
@@ -28,16 +26,15 @@ import com.questionqate.R
 import com.questionqate.Utilties.EventBus
 import com.questionqate.Utilties.LoadingDialog
 import css.fingerprint.Networking.OkhttpObservable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.internal.operators.observable.ObservableTimer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_questions_list.*
-import kotlinx.android.synthetic.main.dialogloading.*
 import okhttp3.FormBody
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
@@ -50,24 +47,24 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
 
     private var user_strike_time = 0
     private var strike_counter = 0
-
+    internal var currentCOunter = 0
+    var level = 0
 
     internal var f: NumberFormat = DecimalFormat("00")
-    internal var currentCOunter = 0
+
 
 
     private val linearLayoutManager: LinearLayoutManager
         get() = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-    var level=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions_list)
 
 
-         val intent = intent
-         level = intent.getIntExtra("level", 0)
+        val intent = intent
+        level = intent.getIntExtra("level", 0)
 
         EventBus.addStrikeTimeListener(this)
 
@@ -83,7 +80,7 @@ class QuestionsMainView : AppCompatActivity(), StrikeTimeInterface, Exceptions {
         user_counter_textview.text = textCounter2
 
 
-System.out.println(QuestionList.getInstance().getQuestionList())
+        System.out.println(QuestionList.getInstance().getQuestionList())
         mRecyclerView!!.adapter = QuestionAdapter(QuestionList.getInstance().getQuestionList()[level])
         chrono_counter.start()
         startLevelCountDown(currentCOunter)
@@ -91,38 +88,70 @@ System.out.println(QuestionList.getInstance().getQuestionList())
 
     }
 
-    fun startLevelCountDown(levelCounter: Int){
+    override fun onResume() {
+        super.onResume()
+        val intent = intent
+        level = intent.getIntExtra("level", 0)
+    }
 
-       var timeooutTimer = 10
-       var showlayoutOnce = true
+    private val compositeDisposable = CompositeDisposable()
+    lateinit var timer: Observable<Long>
 
-       var timer = ObservableTimer.interval(0,1,TimeUnit.SECONDS)
-        timer.subscribeOn(Schedulers.io())
+    fun startLevelCountDown(levelCounter: Int) {
+
+        var timeooutTimer = 10
+        var showlayoutOnce = true
+
+
+
+
+
+
+        timer = ObservableTimer.interval(0, 1, TimeUnit.SECONDS)
+
+        compositeDisposable.add(timer.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map { e-> f.format((levelCounter - e))  }
-                .subscribe({
-                    e-> run {
-                        if (e.toInt() <0) {
-                            if(showlayoutOnce){
+                .map { e -> f.format((levelCounter - e)) }
+                .subscribe({ e ->
+                    run {
+                        if (e.toInt() < 0) {
+                            if (showlayoutOnce) {
                                 mRecyclerView!!.visibility = View.GONE
                                 mRecyclerView!!.adapter = null
                                 question_timeout_layout.visibility = View.VISIBLE
                                 showlayoutOnce = false
                             }
-                            questions_going_back_txt.text = "Going back to levels page in $timeooutTimer"
-                            if(timeooutTimer==0){
+                            if (timeooutTimer == 0) {
                                 goTolevels()
+                            } else {
+                                questions_going_back_txt.text = "Going back to levels page in $timeooutTimer"
+                                timeooutTimer--
+
+
                             }
-                            timeooutTimer--
-                        }else{
+                        } else {
                             counter_textview.text = "Level Strike Time 00:$e"
                         }
+                        println("i am here"+timeooutTimer)
                     }
 
-                })
+                }))
 
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+        user_strike_time = 0
+        strike_counter = 0
+        currentCOunter = 0
+        level = 0
+        EventBus.removeStrikeTimeListener(this)
+    }
+
+
+
 
     internal fun ToastAchivement() {
 
@@ -190,26 +219,28 @@ System.out.println(QuestionList.getInstance().getQuestionList())
         runOnUiThread {
 
             chrono_counter.stop()
-            if(strike_counter>=3){
+            if (strike_counter >= 3) {
                 val completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
+
                 completeDialog.setCancelable(false)
-                if(!isFinishing){
+                if (!isFinishing) {
                     completeDialog.show()
                 }
                 addAchivementToDatabase(completeDialog)
-            }else{
-
+            } else {
 
                 val completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
+
+              //  completeDialog = LoadingDialog().init(this@QuestionsMainView, "Saving Score")
                 completeDialog.setCancelable(false)
-                if(!isFinishing){
+                if (!isFinishing) {
                     completeDialog.show()
                 }
                 completeDialog.getActionButton()!!.text = "OK"
                 completeDialog.getActionButton()!!.visibility = View.VISIBLE
                 completeDialog.setResultText("Score Saved")
                 completeDialog.hideProgress()
-                completeDialog.doAction(View.OnClickListener{
+                completeDialog.doAction(View.OnClickListener {
 
                     completeDialog.dismiss()
                     goTolevels()
@@ -220,13 +251,14 @@ System.out.println(QuestionList.getInstance().getQuestionList())
 
     }
 
+
+
     fun getLevelString(level: Int): String {
 
-        when(level)
-        {
-            0-> return "low"
-            1-> return "medium"
-            2-> return "high"
+        when (level) {
+            0 -> return "low"
+            1 -> return "medium"
+            2 -> return "high"
         }
 
         return "low"
@@ -235,49 +267,56 @@ System.out.println(QuestionList.getInstance().getQuestionList())
     internal fun addAchivementToDatabase(completeDialog: com.questionqate.Dialog.LoadingDialog) {
 
 
-                val form = FormBody.Builder()
-                form.add("student_id", Global_Strings.student_UID_firebase) //Todo add dynamic
-                form.add("striketime", user_strike_time.toString())
-                form.add("level", getLevelString(level))
-                form.add("subject", "java")
+        val form = FormBody.Builder()
+        form.add("student_id", Global_Strings.student_UID_firebase) //Todo add dynamic
+        form.add("striketime", user_strike_time.toString())
+        form.add("level", getLevelString(level))
+        form.add("subject", "java")
 
-                OkhttpObservable
-                        .post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/setNewAchievements",form)
-                        .subscribeOn(Schedulers.io())
-                        .map { response -> JsonParser().parse(response.body()!!.string()) }
-                        .map { jsonObject -> jsonObject.asJsonObject.get("success").asBoolean}
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnNext { success->
+        OkhttpObservable
+                .post("https://us-central1-questionsqate-9a3d7.cloudfunctions.net/setNewAchievements", form)
+                .subscribeOn(Schedulers.io())
+                .map { response -> JsonParser().parse(response.body()!!.string()) }
+                .map { jsonObject -> jsonObject.asJsonObject.get("success").asBoolean }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { success ->
 
 
-                            completeDialog.getActionButton()!!.text = "OK"
-                            completeDialog.getActionButton()!!.visibility = View.VISIBLE
-                            completeDialog.setResultText("Score Saved")
-                            completeDialog.hideProgress()
+                    completeDialog.getActionButton()!!.text = "OK"
+                    completeDialog.getActionButton()!!.visibility = View.VISIBLE
+                    completeDialog.setResultText("Score Saved")
+                    completeDialog.hideProgress()
 
-                            completeDialog.doAction(View.OnClickListener{
-                                completeDialog.dismiss()
-                                goTolevels()
-                            })
+                    completeDialog.doAction(View.OnClickListener {
+                        completeDialog.dismiss()
+                        goTolevels()
+                    })
 
-                        }.subscribe()
+                }.subscribe()
 
     }
 
-    fun goTolevels(){
+    fun goTolevels() {
 
-       var intent =Intent(this@QuestionsMainView,LevelsActivity::class.java)
-        intent.putExtra("finished_level",level)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
+        compositeDisposable.clear()
+        user_strike_time = 0
+        strike_counter = 0
+        currentCOunter = 0
+       // level = 0
+        strike_counter = 0
+
+        var intent = Intent(this@QuestionsMainView, LevelsActivity::class.java)
+        intent.putExtra("finished_level", level)
+        //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK ; Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-       // finish()
-       // onBackPressed()
+        finish()
+        // onBackPressed()
     }
 
     override fun onBackPressed() {
 
-       // finish()
-     //   super.onBackPressed()
+        // finish()
+        //   super.onBackPressed()
     }
 
 }

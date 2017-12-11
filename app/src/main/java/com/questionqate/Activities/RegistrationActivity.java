@@ -16,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.questionqate.R;
 import com.questionqate.Pojo.Student;
+import com.questionqate.Utilties.EventBus;
 
 import java.util.Objects;
 
@@ -34,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
 
         uAuth = FirebaseAuth.getInstance();
 

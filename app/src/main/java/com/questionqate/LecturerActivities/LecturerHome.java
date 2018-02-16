@@ -17,6 +17,7 @@ import com.questionqate.StudentProfile.Profile;
 
 public class LecturerHome extends AppCompatActivity {
 
+    EditText newSubjectName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class LecturerHome extends AppCompatActivity {
         dialog.setContentView(R.layout.custom_diaog_luct);
         dialog.setCancelable(false);
         dialog.show();
-        EditText newSubjectName = dialog.findViewById(R.id.newSubjectName);
+        newSubjectName = dialog.findViewById(R.id.newSubjectName);
         Button send = dialog.findViewById(R.id.send);
         TextView exit = dialog.findViewById(R.id.exit);
 
@@ -69,7 +70,14 @@ public class LecturerHome extends AppCompatActivity {
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adding new Subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Dear Admin,\n" +
+                "this massege regarding to request adding a subject name \n" +
+                "\n" +
+                ""+ newSubjectName.getText().toString()+ "\n" +
+                "\n" +
+                "i accept any penalty after adding the question..\n" +
+                "\n"+
+                "with regards.");
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));

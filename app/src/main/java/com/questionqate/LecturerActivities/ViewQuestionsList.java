@@ -47,7 +47,7 @@ public class ViewQuestionsList extends AppCompatActivity implements LecturerChoi
             ViewSubjectList = findViewById(R.id.ViewSubjectList);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             ViewSubjectList.setLayoutManager(linearLayoutManager);
-            ViewSubjectList.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(), this));
+            ViewSubjectList.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(), this,true));
         } else {
             Toast.makeText(this, "no subjects ", Toast.LENGTH_SHORT).show();
         }

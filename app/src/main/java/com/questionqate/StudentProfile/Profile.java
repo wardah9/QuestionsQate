@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.questionqate.Pojo.Global_Strings;
 import com.questionqate.Pojo.Student;
 import com.questionqate.R;
 
@@ -83,7 +84,7 @@ public class Profile extends AppCompatActivity {
         myRef = database.getReference("My_students");
 
         //good example to avoid late response..
-        myRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        myRef.child(Global_Strings.INSTANCE.getStudent_UID_firebase()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -110,7 +111,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("firebase", "Failed to read data.", error.toException());
+                Log.w("firebase", String.valueOf(error.getCode()));
             }
         });
 

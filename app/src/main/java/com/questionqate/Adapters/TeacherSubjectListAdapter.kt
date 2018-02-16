@@ -24,7 +24,7 @@ import java.io.IOException
  * Created by anarose on 11/14/17.
  */
 
-class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var context: Activity) : RecyclerView.Adapter<TeacherSubjectListAdapter.SubjectList_holder>() {
+class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var context: Activity, internal var sendValues: Boolean) : RecyclerView.Adapter<TeacherSubjectListAdapter.SubjectList_holder>() {
     var status = arrayListOf<Subject_CardView_States>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectList_holder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_subjects_list, parent, false)
@@ -50,8 +50,9 @@ class TeacherSubjectListAdapter(internal var subjects: JsonArray, internal var c
 
         holder.subjet_card.setOnClickListener {
 
-            EventBus.notifyLecturerSubjectChange(subjects.get(position).asJsonObject.get("name").asString)
-
+            if (sendValues) {
+                EventBus.notifyLecturerSubjectChange(subjects.get(position).asJsonObject.get("name").asString)
+            }
             holder.border.setBackgroundResource(R.drawable.border)
             setStatus(position)
             QuestionHelper.subject_name = subjects.get(position).asJsonObject.get("name").asString

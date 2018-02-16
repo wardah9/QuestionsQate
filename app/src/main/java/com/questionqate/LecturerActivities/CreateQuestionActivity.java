@@ -65,7 +65,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements View.On
         recyclerView.setLayoutManager(linearLayoutManager);
 
         if (Teacher.INSTANCE.getCurrentTeacher().getSubjects() != null) {
-            recyclerView.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(), this));
+            recyclerView.setAdapter(new TeacherSubjectListAdapter(Teacher.INSTANCE.getCurrentTeacher().getSubjects(), this,false));
         } else
             Toast.makeText(this, "no subjects ", Toast.LENGTH_SHORT).show();
 
